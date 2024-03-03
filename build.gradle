@@ -11,6 +11,13 @@ dependencies {
     testImplementation 'junit:junit:4.13' // Add JUnit dependency
 }
 
+test {
+    reports {
+        junitXml.enabled = true
+        html.enabled = true
+    }
+}
+
 jar {
     manifest {
         attributes(
