@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'checkstyle'
+    id 'maven-publish' // Add Maven Publish plugin
 }
 
 repositories {
@@ -9,8 +10,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'junit:junit:4.13' // Add JUnit dependency
-    testImplementation 'junit:junit:4.13' // Add JUnit dependency
+    implementation 'junit:junit:4.13'
+    testImplementation 'junit:junit:4.13'
 }
 
 test {
@@ -22,19 +23,19 @@ test {
 
 // Integration Tests
 task integrationTest(type: Test) {
-    useTestNG() // Adjust based on your testing framework (if using JUnit, use 'useJUnit()')
+    useTestNG()
     include '**/*IntegrationTest.*'
 }
 
 // Static Code Analysis (Checkstyle)
 checkstyle {
-    toolVersion = '10.4' // Adjust to the version you want to use
-    configFile = file("${rootDir}/guidelines/code/google_checks.xml") // Provide your Checkstyle configuration file
+    toolVersion = '10.4'
+    configFile = file("${rootDir}/guidelines/code/google_checks.xml")
 }
 
 // Code Coverage (Jacoco)
 jacoco {
-    toolVersion = '0.8.7' // Adjust to the version you want to use
+    toolVersion = '0.8.7'
 }
 
 // Task for generating code coverage reports
@@ -47,11 +48,35 @@ jacocoTestReport {
     dependsOn = ['test', 'integrationTest']
 }
 
+// Maven Publishing Configuration
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            groupId = 'edu.p'
+            artifactId = 'lernfeld-8'
+            version = '1.0.0.0-SNAPSHOT'
+        }
+    }
+
+    repositories {
+        maven {
+            // url = uri("http://nexus/repository/maven-snapshots/")
+            url = uri("http://localhost:8081/repository/maven-snapshots/")
+            allowInsecureProtocol true
+            credentials {
+                username = "admin"
+                password = "admin"
+            }
+        }
+    }
+}
 
 jar {
     manifest {
         attributes(
-                'Main-Class': 'edu.p.eight.Main' // Update with your actual package and class name
+                'Main-Class': 'edu.p.eight.Main'
         )
     }
 }
