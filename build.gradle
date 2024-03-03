@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'jacoco'
+    id 'checkstyle'
 }
 
 repositories {
@@ -17,6 +19,34 @@ test {
         html.enabled = true
     }
 }
+
+// Integration Tests
+task integrationTest(type: Test) {
+    useTestNG() // Adjust based on your testing framework (if using JUnit, use 'useJUnit()')
+    include '**/*IntegrationTest.*'
+}
+
+// Static Code Analysis (Checkstyle)
+checkstyle {
+    toolVersion = '10.4' // Adjust to the version you want to use
+    configFile = file("${rootDir}/guidelines/code/google_checks.xml") // Provide your Checkstyle configuration file
+}
+
+// Code Coverage (Jacoco)
+jacoco {
+    toolVersion = '0.8.7' // Adjust to the version you want to use
+}
+
+// Task for generating code coverage reports
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+
+    dependsOn = ['test', 'integrationTest']
+}
+
 
 jar {
     manifest {
