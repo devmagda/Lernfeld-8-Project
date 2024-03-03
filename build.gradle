@@ -8,6 +8,7 @@ repositories {
 
 dependencies {
     implementation 'junit:junit:4.13' // Add JUnit dependency
+    testImplementation 'junit:junit:4.13' // Add JUnit dependency
 }
 
 jar {
