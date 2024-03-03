@@ -56,14 +56,21 @@ publishing {
 
             groupId = 'edu.p'
             artifactId = 'lernfeld-8'
-            version = '1.0.0.0-SNAPSHOT'
+            if(project.hasProperty('snapshot')) {
+                version = version + '-SNAPSHOT'
+            } else {
+                version = version
+            }
         }
     }
 
     repositories {
         maven {
-            url = uri("http://nexus:8081/repository/maven-snapshots/")
-            //url = uri("http://localhost:8081/repository/maven-snapshots/")
+            if(project.hasProperty('snapshot')) {
+                url = uri("http://localhost:8081/repository/maven-snapshots/")
+            } else {
+                url = uri("http://localhost:8081/repository/maven-releases/")
+            }
             allowInsecureProtocol true
             credentials {
                 username = "admin"
