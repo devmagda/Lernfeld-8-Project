@@ -7,9 +7,6 @@ plugins {
 
 repositories {
     mavenCentral()
-    maven {
-        url 'http://nexus/repository/maven-snapshots'
-    }
 }
 
 dependencies {
@@ -65,7 +62,7 @@ publishing {
 
     repositories {
         maven {
-            url = uri("http://nexus/repository/maven-snapshots/")
+            url = uri("http://nexus:8081/repository/maven-snapshots/")
             //url = uri("http://localhost:8081/repository/maven-snapshots/")
             allowInsecureProtocol true
             credentials {
