@@ -67,9 +67,9 @@ publishing {
     repositories {
         maven {
             if(project.hasProperty('snapshot')) {
-                url = uri("http://localhost:8081/repository/maven-snapshots/")
+                url = uri("http://nexus:8081/repository/maven-snapshots/")
             } else {
-                url = uri("http://localhost:8081/repository/maven-releases/")
+                url = uri("http://nexus:8081/repository/maven-releases/")
             }
             allowInsecureProtocol true
             credentials {
