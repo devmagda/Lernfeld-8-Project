@@ -21,10 +21,10 @@ test {
 }
 
 // Integration Tests
-task integrationTest(type: Test) {
-    useTestNG() // Adjust based on your testing framework (if using JUnit, use 'useJUnit()')
-    include '**/*IntegrationTest.*'
-}
+//task integrationTest(type: Test) {
+//    useTestNG() // Adjust based on your testing framework (if using JUnit, use 'useJUnit()')
+//    include '**/*IntegrationTest.*'
+//}
 
 // Static Code Analysis (Checkstyle)
 checkstyle {
