@@ -1,7 +1,7 @@
 package edu.p.eight.model;
 
 import edu.p.eight.exceptions.EndOfLaneException;
-import edu.p.eight.exceptions.NoSpaceException;
+import edu.p.eight.exceptions.SpawningFailedException;
 import edu.p.eight.model.entity.DecoEntity;
 import edu.p.eight.model.entity.Entity;
 import edu.p.eight.model.entity.MovingEntity;
@@ -15,8 +15,8 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class Lane<E extends MovingEntity> {
-    public static final float LENGTH = 50F;
-    private List<E> entities;
+    public static final float LENGTH = 100F;
+    private List<MovingEntity> entities;
     private final Function<Float, Position> drawCalculations;
     private final Supplier<E> generator;
 
@@ -29,25 +29,25 @@ public class Lane<E extends MovingEntity> {
         this.entities = new ArrayList<>();
     }
 
-    public void update(float distance, float chance) throws NoSpaceException {
+    public E update(float distance, float chance) throws SpawningFailedException {
         updateCars(distance);
-        trySpawnCar(chance);
         removeDeadEntities();
+        return trySpawnCar(chance);
     }
 
-    public void spawnCar(E car) {
+    public void spawnEntity(MovingEntity car) {
             entities.add(car);
     }
 
-    public void trySpawnCar(float chance) throws NoSpaceException {
+    public E trySpawnCar(float chance) throws SpawningFailedException {
         if(doSpawnEntity(chance)) {
             E car = generator.get();
             if(hasSpace(car)) {
-                spawnCar(car);
-            } else {
-                throw new NoSpaceException();
+                return car;
             }
+            throw new SpawningFailedException("Not enought space to spawn ..");
         }
+        throw new SpawningFailedException("Chance was too low to spawn ..");
     }
 
     private boolean hasSpace(Entity other) {
@@ -70,7 +70,7 @@ public class Lane<E extends MovingEntity> {
     }
 
     public void updateCars(float distance) {
-        for(E entity : entities) {
+        for(MovingEntity entity : entities) {
             try {
                 entity.forward(distance);
             } catch (EndOfLaneException e) {
@@ -100,6 +100,23 @@ public class Lane<E extends MovingEntity> {
             }
         }
         return represented.stream().collect(Collectors.joining());
+    }
+
+    public static List<Lanes> getStreetLanes() {
+        List<Lanes> lanes = new ArrayList<>();
+
+        // Order is important to create Two cars left and right but not spawn a third one
+        lanes.add(Lanes.LEFT);
+        lanes.add(Lanes.RIGHT);
+        lanes.add(Lanes.CENTER);
+        return lanes;
+    }
+
+    public static List<Lanes> getDecoLanes() {
+        List<Lanes> lanes = new ArrayList<>();
+        lanes.add(Lanes.DECO_LEFT);
+        lanes.add(Lanes.DECO_RIGHT);
+        return lanes;
     }
 
     @Override
