@@ -7,9 +7,6 @@ import edu.p.eight.model.entity.StreetEntity;
 
 class Main {
     public static void main(String[] args) throws PlayerCrashedException {
-        StreetEntity entity = StreetEntity.getRandom();
-
-
         GameState gameState = new GameState();
 
         for(int i = 0; i < 100; i++) {

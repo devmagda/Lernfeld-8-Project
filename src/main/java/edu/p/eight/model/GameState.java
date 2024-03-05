@@ -1,11 +1,8 @@
 package edu.p.eight.model;
 
-import edu.p.eight.exceptions.NoSpaceException;
 import edu.p.eight.exceptions.PlayerCrashedException;
-import edu.p.eight.model.entity.DecoEntity;
-import edu.p.eight.model.entity.MovingEntity;
-import edu.p.eight.model.entity.PlayerEntity;
-import edu.p.eight.model.entity.StreetEntity;
+import edu.p.eight.exceptions.SpawningFailedException;
+import edu.p.eight.model.entity.*;
 import edu.p.eight.view.Position;
 
 import java.util.*;
@@ -86,11 +83,26 @@ public class GameState {
     }
 
     public void updateLanes() {
-        for(Lanes lane : getLanes()) {
+        int spawnCounter = 1;
+        for(Lanes lane : getStreetLanes()) {
+            if(spawnCounter < LANE_COUNT) {
+                try {
+                    MovingEntity entity = lanes.get(lane).update(stats.speed, stats.spawnRate);
+                    lanes.get(lane).spawnEntity(entity);
+                    spawnCounter++;
+                } catch (SpawningFailedException e) {
+                    System.out.println(e.getMessage());
+                }
+            } else {
+                System.out.println("SpawnCount Failure");
+            }
+        }
+        for(Lanes lane : getDecoLanes()) {
             try {
-                lanes.get(lane).update(stats.speed, stats.spawnRate);
-            } catch (NoSpaceException e) {
-                System.out.println("Could not spawn car at " + lane + ": " + e.getMessage());
+                MovingEntity entity = lanes.get(lane).update(stats.speed, stats.spawnRate);
+                lanes.get(lane).spawnEntity(entity);
+            } catch (SpawningFailedException e) {
+                System.out.println("Spawning failed because of to many collisions");
             }
         }
     }
