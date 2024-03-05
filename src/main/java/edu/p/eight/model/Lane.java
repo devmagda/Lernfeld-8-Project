@@ -2,6 +2,10 @@ package edu.p.eight.model;
 
 import edu.p.eight.exceptions.EndOfLaneException;
 import edu.p.eight.exceptions.NoSpaceException;
+import edu.p.eight.model.entity.DecoEntity;
+import edu.p.eight.model.entity.Entity;
+import edu.p.eight.model.entity.MovingEntity;
+import edu.p.eight.model.entity.StreetEntity;
 import edu.p.eight.view.Position;
 
 import java.util.ArrayList;

@@ -3,7 +3,7 @@ package edu.p.eight;
 import edu.p.eight.exceptions.PlayerCrashedException;
 import edu.p.eight.model.GameState;
 import edu.p.eight.model.Lane;
-import edu.p.eight.model.StreetEntity;
+import edu.p.eight.model.entity.StreetEntity;
 
 class Main {
     public static void main(String[] args) throws PlayerCrashedException {

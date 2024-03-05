@@ -2,7 +2,10 @@ package edu.p.eight.model;
 
 import edu.p.eight.exceptions.NoSpaceException;
 import edu.p.eight.exceptions.PlayerCrashedException;
-import edu.p.eight.game.Stats;
+import edu.p.eight.model.entity.DecoEntity;
+import edu.p.eight.model.entity.MovingEntity;
+import edu.p.eight.model.entity.PlayerEntity;
+import edu.p.eight.model.entity.StreetEntity;
 import edu.p.eight.view.Position;
 
 import java.util.*;

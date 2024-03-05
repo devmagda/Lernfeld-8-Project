@@ -1,4 +1,4 @@
-package edu.p.eight.game;
+package edu.p.eight.model;
 
 public class Stats {
 
