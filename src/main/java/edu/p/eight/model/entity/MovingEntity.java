@@ -4,11 +4,11 @@ import edu.p.eight.exceptions.EndOfLaneException;
 import edu.p.eight.model.Lane;
 import edu.p.eight.view.Texture;
 
-public class MovingEntity extends Entity {
+public abstract class MovingEntity extends Entity {
 
     private boolean toBeRemoved = false;
 
-    public MovingEntity(Texture texture) {
+    protected MovingEntity(Texture texture) {
         super(Lane.LENGTH, texture);
     }
 
@@ -37,14 +37,5 @@ public class MovingEntity extends Entity {
      */
     public boolean isDead() {
         return toBeRemoved;
-    }
-
-    /**
-     * TODO: Implement
-     * create a function to create a random car object
-     * @return the random car object
-     */
-    public static MovingEntity getRandom() {
-        throw new RuntimeException("This object should not be initialized!");
     }
 }

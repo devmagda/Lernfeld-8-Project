@@ -11,11 +11,11 @@ public abstract class Entity {
     protected final Texture texture;
     protected final float overlappingDistance;
 
-    public Entity(float distance, Texture texture) {
+    protected Entity(float distance, Texture texture) {
         this(distance, texture, DEFAULT_OVERLAPPING_DISTANCE);
     }
 
-    public Entity(float distance, Texture texture, float overlappingDistance) {
+    protected Entity(float distance, Texture texture, float overlappingDistance) {
         this.distance = distance;
         this.texture = texture;
         this.overlappingDistance = overlappingDistance;

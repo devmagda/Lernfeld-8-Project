@@ -4,9 +4,9 @@ import java.awt.*;
 
 public class Texture {
     private Graphics2D texture;
-    private DrawInstruction instruction;
+    private DrawInstructions instruction;
 
-    public Texture(Graphics2D texture, DrawInstruction instruction) {
+    public Texture(Graphics2D texture, DrawInstructions instruction) {
         this.texture = texture;
         this.instruction = instruction;
     }
@@ -15,7 +15,7 @@ public class Texture {
         return null;
     }
 
-    public enum DrawInstruction {
+    public enum DrawInstructions {
         CENTER,
         UPPER_LEFT,
         UPPER_RIGHT,
