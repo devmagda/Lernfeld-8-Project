@@ -3,6 +3,8 @@ package edu.p.eight.model.entity;
 import edu.p.eight.view.Texture;
 
 public class StreetEntity extends MovingEntity {
+
+    public static final Texture.DrawInstructions DEFAULT_DRAW_INSTRUCTIONS = Texture.DrawInstructions.CENTER;
     public StreetEntity(Texture texture) {
         super(texture);
     }

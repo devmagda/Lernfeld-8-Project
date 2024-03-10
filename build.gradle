@@ -90,6 +90,10 @@ publishing {
 }
 
 jar {
+    from('src/main/resources') {
+        include '**/*.*'
+    }
+
     manifest {
         attributes(
                 'Main-Class': 'edu.p.eight.Main'

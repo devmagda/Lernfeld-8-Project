@@ -6,6 +6,9 @@ import edu.p.eight.view.Texture;
 
 public abstract class MovingEntity extends Entity {
 
+    public static final int WIDTH = 100;
+    public static final int HEIGHT = 100;
+
     private boolean toBeRemoved = false;
 
     protected MovingEntity(Texture texture) {

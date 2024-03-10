@@ -5,6 +5,12 @@ import edu.p.eight.view.Texture;
 import static edu.p.eight.model.Lane.*;
 
 public class PlayerEntity extends Entity {
+    public static final int WIDTH = 100;
+    public static final int HEIGHT = 50;
+
+    public static final Texture.DrawInstructions DEFAULT_DRAW_INSTRUCTIONS = Texture.DrawInstructions.CENTER;
+
+
     private Lanes lane;
 
     public PlayerEntity(Texture texture, Lanes lane) {
