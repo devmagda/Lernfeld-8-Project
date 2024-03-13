@@ -70,7 +70,7 @@ public class GameState {
 
     public static void update(LaneSwitchAction playerAction) throws PlayerCrashedException {
         checkCollisions();
-        this.playerCar.move(playerAction);
+        playerCar.move(playerAction);
         updateLanes();
     }
 
