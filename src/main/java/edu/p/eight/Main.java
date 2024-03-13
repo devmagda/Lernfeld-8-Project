@@ -20,15 +20,14 @@ class Main {
         // Has to be called first
         TextureManager.initialize();
 
-        GameState gameState = new GameState();
+        GameState.init();
 
         GUI gui = new GUI();
         gui.show();
 
         for(int i = 0; i < 0; i++) {
-            gameState.update(Lane.LaneSwitchAction.NONE);
-            System.out.println(gameState);
-            gui.update(gameState);
+            GameState.update(Lane.LaneSwitchAction.NONE);
+            gui.update();
             gui.show();
         }
 

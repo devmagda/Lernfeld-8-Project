@@ -12,20 +12,16 @@ import static edu.p.eight.model.Lane.*;
 public class GameState {
     public static final int LANE_COUNT = 3;
 
-    private Map<Lanes, Lane<? extends MovingEntity>> lanes;
-    private PlayerEntity playerCar;
+    private static Map<Lanes, Lane<? extends MovingEntity>> lanes;
+    private static PlayerEntity playerCar;
 
-    private Stats stats;
-
-    public GameState() {
-        this.playerCar = new PlayerEntity(null, Lanes.CENTER);
+    public static void init() {
+        playerCar = new PlayerEntity(null, Lanes.CENTER);
         initLanes();
-        this.stats = new Stats();
-
     }
 
-    private void initLanes() {
-        this.lanes = new HashMap<>();
+    private static void initLanes() {
+        lanes = new HashMap<>();
         lanes.put(Lanes.LEFT, new Lane<>(
                 StreetEntity::getRandom,
                 l -> {
@@ -68,17 +64,17 @@ public class GameState {
         }));
     }
 
-    public void update() throws PlayerCrashedException {
+    public static void update() throws PlayerCrashedException {
         update(LaneSwitchAction.NONE);
     }
 
-    public void update(LaneSwitchAction playerAction) throws PlayerCrashedException {
+    public static void update(LaneSwitchAction playerAction) throws PlayerCrashedException {
         checkCollisions();
         this.playerCar.move(playerAction);
         updateLanes();
     }
 
-    public void updateLanes() {
+    public static void updateLanes() {
         int spawnCounter = 1;
         for(Lanes lane : getStreetLanes()) {
             if(spawnCounter < LANE_COUNT) {
@@ -103,26 +99,13 @@ public class GameState {
         }
     }
 
-    public void checkCollisions() throws PlayerCrashedException {
-        if(Lane.collides(this.lanes.get(this.playerCar.getLane()), this.playerCar)) {
+    public static void checkCollisions() throws PlayerCrashedException {
+        if(Lane.collides(lanes.get(playerCar.getLane()), playerCar)) {
             throw new PlayerCrashedException();
         }
     }
 
-    @Override
-    public String toString() {
-        String border = "";
-        for(int i = 0; i < LENGTH; i++) {
-            border += "|";
-        }
-
-        String result = border + "\n";
-        result += lanes.get(Lanes.DECO_RIGHT).toString() + "\n";
-        result += lanes.get(Lanes.RIGHT).toString() + "\n";
-        result += lanes.get(Lanes.CENTER).toString() + "\n";
-        result += lanes.get(Lanes.LEFT).toString() + "\n";
-        result += lanes.get(Lanes.DECO_LEFT).toString() + "\n";
-        result += border;
-        return result;
+    public static Lane getLane(Lanes lane) {
+        return lanes.get(lane);
     }
 }

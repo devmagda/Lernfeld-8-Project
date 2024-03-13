@@ -100,7 +100,7 @@ public class TextureManager {
             throw new RuntimeException("TextureManager is not initialized! This needs to be done first before trying to load textures ..");
     }
 
-    public static Texture createView(GameState gameState) {
+    public static Texture createView() {
         return null;
     }
 }

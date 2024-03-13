@@ -27,10 +27,10 @@ public class GUI {
         this("90's Racing Game");
     }
 
-    public void update(GameState gameState) {
+    public void update() {
         // Write code to set the panel to the gui
 
-        Texture texture = TextureManager.createView(gameState);
+        Texture texture = TextureManager.createView();
 
         // setImage ...
     }
