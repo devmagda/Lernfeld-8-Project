@@ -12,7 +12,7 @@ public class DrawingFunctions {
         float yDistance = Math.abs(start.getY() - end.getY());
         float x = start.getX() - factor * xDistance;
         float y = start.getY() + factor * yDistance;
-        float scale = factor * 2;
+        float scale = factor * 1;
         return new Position(x, y, scale);
     }
 
@@ -24,7 +24,7 @@ public class DrawingFunctions {
         float yDistance = Math.abs(start.getY() - end.getY());
         float x = start.getX() - factor * xDistance;
         float y = start.getY() + factor * yDistance;
-        float scale = factor * 2;
+        float scale = factor * 1;
         Position position = new Position(x, y, scale);
         System.out.println(position);
         return position;
@@ -38,7 +38,7 @@ public class DrawingFunctions {
         float yDistance = Math.abs(start.getY() - end.getY());
         float x = start.getX() + factor * xDistance;
         float y = start.getY() + factor * yDistance;
-        float scale = factor * 2;
+        float scale = factor * 1;
         return new Position(x, y, scale);
     }
 
@@ -50,7 +50,7 @@ public class DrawingFunctions {
         float yDistance = Math.abs(start.getY() - end.getY());
         float x = start.getX() + factor * xDistance;
         float y = start.getY() + factor * yDistance;
-        float scale = factor * 2;
+        float scale = factor * 1;
         return new Position(x, y, scale);
     }
 
@@ -62,7 +62,7 @@ public class DrawingFunctions {
         float yDistance = Math.abs(start.getY() - end.getY());
         float x = start.getX() + factor * xDistance;
         float y = start.getY() + factor * yDistance;
-        float scale = factor * 2;
+        float scale = factor * 1;
         return new Position(x, y, scale);
     }
 

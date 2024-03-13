@@ -69,7 +69,7 @@ public class GameState {
     }
 
     public static void checkCollisions() throws PlayerCrashedException {
-        if(Lane.collides(lanes.get(playerCar.getLane()), playerCar)) {
+        if(Lane.collides(lanes.get(playerCar.getLane()), playerCar) && Stats.doCollision) {
             throw new PlayerCrashedException();
         }
     }
