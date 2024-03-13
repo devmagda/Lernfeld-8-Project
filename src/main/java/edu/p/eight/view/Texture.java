@@ -10,12 +10,25 @@ import java.io.IOException;
 
 public class Texture {
     public static final DrawInstructions DEFAULT_DRAW_INSTRUCTION = DrawInstructions.CENTER;
+    public static final int DEFAULT_BACKGROUND_WIDTH = 500;
+    public static final int DEFAULT_BACKGROUND_HEIGHT = 400;
     private final BufferedImage texture;
     private final DrawInstructions instruction;
     private final String textureName;
 
-    public Texture(BufferedImage texture, String textureName) {
-        this(texture, DEFAULT_DRAW_INSTRUCTION, textureName);
+    private final int width;
+    private final int height;
+
+    public Texture(BufferedImage texture, DrawInstructions instruction, String textureName, int width, int height) {
+        this.texture = texture;
+        this.instruction = instruction;
+        this.textureName = textureName;
+        this.width = width;
+        this.height = height;
+    }
+
+    public Texture(BufferedImage texture, String textureName, int width, int height) {
+        this(texture, DEFAULT_DRAW_INSTRUCTION, textureName, width, height);
     }
 
     public Texture mirrored() {
@@ -28,7 +41,7 @@ public class Texture {
             case LOWER_RIGHT -> mirroredInstruction = DrawInstructions.LOWER_LEFT;
             case LOWER_CENTER -> mirroredInstruction = DrawInstructions.LOWER_CENTER;
         }
-        Texture copy = new Texture(Texture.mirrorImageHorizontal(this.texture), mirroredInstruction, this.textureName);
+        Texture copy = new Texture(Texture.mirrorImageHorizontal(this.texture), mirroredInstruction, this.textureName, this.width, this.height);
         return copy;
     }
 
@@ -40,13 +53,6 @@ public class Texture {
         return op.filter(originalImage, null);
     }
 
-
-    public Texture(BufferedImage texture, DrawInstructions instruction, String textureName) {
-        this.texture = texture;
-        this.instruction = instruction;
-        this.textureName = textureName;
-    }
-
     public enum DrawInstructions {
         CENTER,
         UPPER_LEFT,
@@ -56,10 +62,10 @@ public class Texture {
         LOWER_CENTER
     }
 
-    public static Texture fromFile(File file) {
+    public static Texture fromFile(File file, int width, int height) {
         if(file != null) {
             try {
-                return new Texture(ImageIO.read(file), file.getName());
+                return new Texture(ImageIO.read(file), file.getName(), width, height);
             } catch (IOException e) {
                 throw new RuntimeException("Could not load texture from file <" + file.getName() + ">");
             }
@@ -69,5 +75,21 @@ public class Texture {
 
     public String getTextureName() {
         return this.textureName;
+    }
+
+    public BufferedImage getTexture() {
+        return texture;
+    }
+
+    public DrawInstructions getInstruction() {
+        return instruction;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }
