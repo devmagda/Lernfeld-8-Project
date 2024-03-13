@@ -2,11 +2,13 @@ package edu.p.eight.manager;
 
 import edu.p.eight.builder.TextureBuilder;
 import edu.p.eight.model.GameState;
+import edu.p.eight.model.Lane;
 import edu.p.eight.model.entity.DecoEntity;
 import edu.p.eight.model.entity.MovingEntity;
 import edu.p.eight.model.entity.PlayerEntity;
 import edu.p.eight.model.entity.StartEntity;
 import edu.p.eight.utils.FileUtil;
+import edu.p.eight.view.Position;
 import edu.p.eight.view.Texture;
 
 import java.util.List;
@@ -103,6 +105,27 @@ public class TextureManager {
     }
 
     public static Texture createView() {
+        TextureBuilder builder = new TextureBuilder(TextureManager.getBackgroundTexture());
+        drawLanes(builder);
+        return builder.build();
+    }
+
+    private static void drawLanes(TextureBuilder builder) {
+        drawLane(builder, GameState.getLane(Lane.Lanes.DECO_LEFT));
+        drawLane(builder, GameState.getLane(Lane.Lanes.DECO_RIGHT));
+        drawLane(builder, GameState.getLane(Lane.Lanes.LEFT));
+        drawLane(builder, GameState.getLane(Lane.Lanes.CENTER));
+        drawLane(builder, GameState.getLane(Lane.Lanes.RIGHT));
+    }
+
+    private static void drawLane(TextureBuilder builder, Lane lane) {
+        for(MovingEntity entity : lane.getEntities()) {
+            Position pos = lane.getDrawCalculations().apply(entity.getDistance());
+            builder.add(entity.getTexture(), pos.getX().intValue(), pos.getY().intValue(), pos.getScale());
+        }
+    }
+
+    public static Texture createRandomView() {
         int index = new Random().nextInt(TextureManager.getCarTextures().size());
         Texture car = TextureManager.getCarTextures().get(index);
         int x = new Random().nextInt(300);

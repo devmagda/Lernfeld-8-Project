@@ -14,13 +14,28 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class Lane<E extends MovingEntity> {
-    public static final float LENGTH = 100F;
+public class Lane {
+    public static final float LENGTH = 10F;
     private List<MovingEntity> entities;
     private final Function<Float, Position> drawCalculations;
-    private final Supplier<E> generator;
+    private final Supplier<MovingEntity> generator;
 
-    Lane(Supplier<E> generator, Function<Float, Position> drawCalculations) {
+    public static final Position DECO_LEFT_START = new Position(248, 100, 1);
+    public static final Position DECO_LEFT_END = new Position(0, 400, 1);
+
+    public static final Position LEFT_START = new Position(249, 100, 1);
+    public static final Position LEFT_END = new Position(100, 400, 1);
+
+    public static final Position CENTER_START = new Position(250, 100, 1);
+    public static final Position CENTER_END = new Position(250, 400, 1);
+
+    public static final Position RIGHT_START = new Position(251, 100, 1);
+    public static final Position RIGHT_END = new Position(400, 400, 1);
+
+    public static final Position DECO_RIGHT_START = new Position(252, 100, 1);
+    public static final Position DECO_RIGHT_END = new Position(500, 400, 1);
+
+    Lane(Supplier<MovingEntity> generator, Function<Float, Position> drawCalculations) {
         if(drawCalculations == null || generator == null) {
             throw new RuntimeException("drawCalculations or generator cannot be null");
         }
@@ -29,19 +44,18 @@ public class Lane<E extends MovingEntity> {
         this.entities = new ArrayList<>();
     }
 
-    public E update(float distance, float chance) throws SpawningFailedException {
+    public void update(float distance) {
         updateCars(distance);
         removeDeadEntities();
-        return trySpawnCar(chance);
     }
 
     public void spawnEntity(MovingEntity car) {
             entities.add(car);
     }
 
-    public E trySpawnCar(float chance) throws SpawningFailedException {
+    public MovingEntity trySpawnCar(float chance) throws SpawningFailedException {
         if(doSpawnEntity(chance)) {
-            E car = generator.get();
+            MovingEntity car = generator.get();
             if(hasSpace(car)) {
                 return car;
             }
@@ -56,7 +70,7 @@ public class Lane<E extends MovingEntity> {
     }
 
     private boolean doSpawnEntity(float chance) {
-        E testObject = generator.get();
+        MovingEntity testObject = generator.get();
         float random = (float) Math.random();
         if (testObject instanceof DecoEntity) {
             float actualChance = DecoEntity.DEFAULT_SPAWN_RATE;
@@ -106,8 +120,8 @@ public class Lane<E extends MovingEntity> {
         List<Lanes> lanes = new ArrayList<>();
 
         // Order is important to create Two cars left and right but not spawn a third one
-        lanes.add(Lanes.LEFT);
         lanes.add(Lanes.RIGHT);
+        lanes.add(Lanes.LEFT);
         lanes.add(Lanes.CENTER);
         return lanes;
     }
@@ -117,6 +131,14 @@ public class Lane<E extends MovingEntity> {
         lanes.add(Lanes.DECO_LEFT);
         lanes.add(Lanes.DECO_RIGHT);
         return lanes;
+    }
+
+    public List<MovingEntity> getEntities() {
+        return this.entities;
+    }
+
+    public Function<Float, Position> getDrawCalculations() {
+        return drawCalculations;
     }
 
     @Override

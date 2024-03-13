@@ -21,7 +21,7 @@ public class TextureBuilder {
     public TextureBuilder(String name, Texture.DrawInstructions drawInstructions, int width, int height ) {
         this.result = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         this.graphics = result.createGraphics();
-        this.graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        // this.graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         this.name = name;
         this.drawInstructions = drawInstructions;
         this.width = width;

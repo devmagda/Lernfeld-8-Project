@@ -1,5 +1,7 @@
 package edu.p.eight.view;
 
+import edu.p.eight.model.entity.Entity;
+
 public class Position {
     private float x;
     private float y;
@@ -46,5 +48,12 @@ public class Position {
         return new Position(this.x, this.y);
     }
 
-
+    @Override
+    public String toString() {
+        return "Position{" +
+                "x=" + x +
+                ", y=" + y +
+                ", scale=" + scale +
+                '}';
+    }
 }

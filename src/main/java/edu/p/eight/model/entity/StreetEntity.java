@@ -1,6 +1,9 @@
 package edu.p.eight.model.entity;
 
+import edu.p.eight.manager.TextureManager;
 import edu.p.eight.view.Texture;
+
+import java.util.Random;
 
 public class StreetEntity extends MovingEntity {
 
@@ -15,6 +18,9 @@ public class StreetEntity extends MovingEntity {
      * @return the random car object
      */
     public static StreetEntity getRandom() {
-        return new StreetEntity(null);
+        int index = new Random().nextInt(TextureManager.getCarTextures().size());
+        Texture car = TextureManager.getCarTextures().get(index);
+
+        return new StreetEntity(car);
     }
 }

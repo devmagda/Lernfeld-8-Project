@@ -9,11 +9,11 @@ import java.io.File;
 import java.io.IOException;
 
 public class Texture {
-    public static final DrawInstructions DEFAULT_DRAW_INSTRUCTION = DrawInstructions.CENTER;
+    public static final  DrawInstructions DEFAULT_DRAW_INSTRUCTION = DrawInstructions.CENTER;
     public static final int DEFAULT_BACKGROUND_WIDTH = 500;
     public static final int DEFAULT_BACKGROUND_HEIGHT = 400;
     private final BufferedImage texture;
-    private final DrawInstructions instruction;
+    private DrawInstructions instruction;
     private final String textureName;
 
     private final int width;
@@ -91,5 +91,9 @@ public class Texture {
 
     public int getHeight() {
         return height;
+    }
+
+    public void setInstruction(DrawInstructions instruction) {
+        this.instruction = instruction;
     }
 }

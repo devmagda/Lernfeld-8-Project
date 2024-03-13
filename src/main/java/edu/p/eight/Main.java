@@ -26,6 +26,7 @@ class Main {
             public void run() {
                 try {
                     GameState.update(Lane.LaneSwitchAction.NONE);
+                    GameState.printLanes();
                 } catch (PlayerCrashedException e) {
                     throw new RuntimeException(e);
                 }
@@ -35,6 +36,6 @@ class Main {
 
         // Start the Timer with a delay of 0
         // and repeat every 500 milliseconds.
-        timer.schedule(task, 0, 500);
+        timer.schedule(task, 0, 60);
     }
 }

@@ -2,8 +2,8 @@ package edu.p.eight.model;
 
 import edu.p.eight.exceptions.PlayerCrashedException;
 import edu.p.eight.exceptions.SpawningFailedException;
+import edu.p.eight.generators.DrawingFunctions;
 import edu.p.eight.model.entity.*;
-import edu.p.eight.view.Position;
 
 import java.util.*;
 
@@ -12,56 +12,22 @@ import static edu.p.eight.model.Lane.*;
 public class GameState {
     public static final int LANE_COUNT = 3;
 
-    private static Map<Lanes, Lane<? extends MovingEntity>> lanes;
+    private static Map<Lanes, Lane> lanes;
     private static PlayerEntity playerCar;
 
     public static void init() {
+        Stats.init();
         playerCar = new PlayerEntity(null, Lanes.CENTER);
         initLanes();
     }
 
     private static void initLanes() {
         lanes = new HashMap<>();
-        lanes.put(Lanes.LEFT, new Lane<>(
-                StreetEntity::getRandom,
-                l -> {
-            Position pos = new Position();
-
-
-            return pos;
-        }));
-        lanes.put(Lanes.RIGHT, new Lane<>(
-                StreetEntity::getRandom,
-                l -> {
-            Position pos = new Position();
-
-
-            return pos;
-        }));
-        lanes.put(Lanes.CENTER, new Lane<>(
-                StreetEntity::getRandom,
-                l -> {
-            Position pos = new Position();
-
-
-            return pos;
-        }));
-        lanes.put(Lanes.DECO_LEFT, new Lane<>(
-                DecoEntity::getRandom,
-                l -> {
-            Position pos = new Position();
-
-
-            return pos;
-        }));
-        lanes.put(Lanes.DECO_RIGHT, new Lane<>(
-                DecoEntity::getRandom,
-                l -> {
-            Position pos = new Position();
-
-
-            return pos;
-        }));
+        lanes.put( Lanes.LEFT,       new Lane( StreetEntity::getRandom, DrawingFunctions::left));
+        lanes.put( Lanes.RIGHT,      new Lane( StreetEntity::getRandom, DrawingFunctions::right));
+        lanes.put( Lanes.CENTER,     new Lane( StreetEntity::getRandom, DrawingFunctions::center));
+        lanes.put( Lanes.DECO_LEFT,  new Lane( DecoEntity::getRandom,   DrawingFunctions::decoLeft));
+        lanes.put( Lanes.DECO_RIGHT, new Lane( DecoEntity::getRandom,   DrawingFunctions::decoRight));
     }
 
     public static void update() throws PlayerCrashedException {
@@ -77,9 +43,10 @@ public class GameState {
     public static void updateLanes() {
         int spawnCounter = 1;
         for(Lanes lane : getStreetLanes()) {
+            lanes.get(lane).update(Stats.speed);
             if(spawnCounter < LANE_COUNT) {
                 try {
-                    MovingEntity entity = lanes.get(lane).update(Stats.speed, Stats.spawnRate);
+                    MovingEntity entity = lanes.get(lane).trySpawnCar(Stats.spawnRate);
                     lanes.get(lane).spawnEntity(entity);
                     spawnCounter++;
                 } catch (SpawningFailedException e) {
@@ -91,7 +58,8 @@ public class GameState {
         }
         for(Lanes lane : getDecoLanes()) {
             try {
-                MovingEntity entity = lanes.get(lane).update(Stats.speed, Stats.spawnRate);
+                lanes.get(lane).update(Stats.speed);
+                MovingEntity entity = lanes.get(lane).trySpawnCar(Stats.spawnRate);
                 lanes.get(lane).spawnEntity(entity);
             } catch (SpawningFailedException e) {
                 System.out.println("Spawning failed because of to many collisions");
@@ -107,5 +75,14 @@ public class GameState {
 
     public static Lane getLane(Lanes lane) {
         return lanes.get(lane);
+    }
+
+    public static void printLanes() {
+        System.out.println(lanes.get(Lanes.DECO_LEFT));
+        System.out.println(lanes.get(Lanes.LEFT));
+        System.out.println(lanes.get(Lanes.CENTER));
+        System.out.println(lanes.get(Lanes.RIGHT));
+        System.out.println(lanes.get(Lanes.DECO_RIGHT));
+
     }
 }
