@@ -6,6 +6,7 @@ import edu.p.eight.model.GameState;
 import edu.p.eight.model.Lane;
 import edu.p.eight.utils.FileUtil;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -16,6 +17,8 @@ class Main {
     public static void main(String[] args) throws PlayerCrashedException {
         // Has to be called first
         TextureManager.initialize();
+        System.out.println("Hallo");
+
 
         GameState gameState = new GameState();
 
@@ -23,5 +26,10 @@ class Main {
             gameState.update(Lane.LaneSwitchAction.NONE);
             System.out.println(gameState);
         }
+
+        JFrame frame = new JFrame("Hallo");
+        frame.setSize(800, 600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
     }
 }

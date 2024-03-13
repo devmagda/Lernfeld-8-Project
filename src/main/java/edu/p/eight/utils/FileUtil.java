@@ -25,6 +25,6 @@ public class FileUtil {
     }
 
     public static File getConfigFile() {
-        return new File("config.properties");
+        return new File("resources/config.properties");
     }
 }

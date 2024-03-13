@@ -24,6 +24,7 @@ dependencies {
 }
 
 test {
+    group = '__QUICK__ACCESS__'
     reports {
         junitXml.enabled = true
         html.enabled = true
@@ -32,6 +33,7 @@ test {
 
 // Integration Tests
 task integrationTest(type: Test) {
+    group = '__QUICK__ACCESS__'
     useTestNG()
     include '**/*IntegrationTest.*'
 }
@@ -89,6 +91,17 @@ publishing {
     }
 }
 
+task copyResources(type: Copy) {
+    from 'src/main/resources'
+    into 'build/libs/resources'
+}
+
+task startJar(type: Exec, dependsOn: jar) {
+    group = '__QUICK__ACCESS__'
+    commandLine 'java', '-jar', 'lernfeld-8-Project-1.1.0.0.jar'
+    workingDir = file('build/libs')
+}
+
 jar {
     from('src/main/resources') {
         include '**/*.*'
@@ -101,4 +114,5 @@ jar {
                 'Main-Class': 'edu.p.eight.Main'
         )
     }
+    dependsOn copyResources
 }
