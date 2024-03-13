@@ -3,6 +3,7 @@ package edu.p.eight.model;
 import edu.p.eight.exceptions.PlayerCrashedException;
 import edu.p.eight.exceptions.SpawningFailedException;
 import edu.p.eight.generators.DrawingFunctions;
+import edu.p.eight.manager.TextureManager;
 import edu.p.eight.model.entity.*;
 
 import java.util.*;
@@ -17,7 +18,7 @@ public class GameState {
 
     public static void init() {
         Stats.init();
-        playerCar = new PlayerEntity(null, Lanes.CENTER);
+        playerCar = new PlayerEntity(TextureManager.getPlayerTextures().get(0), Lanes.CENTER);
         initLanes();
     }
 
@@ -83,6 +84,9 @@ public class GameState {
         System.out.println(lanes.get(Lanes.CENTER));
         System.out.println(lanes.get(Lanes.RIGHT));
         System.out.println(lanes.get(Lanes.DECO_RIGHT));
+    }
 
+    public static PlayerEntity getPlayerCar() {
+        return playerCar;
     }
 }

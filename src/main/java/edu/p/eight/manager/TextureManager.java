@@ -116,6 +116,15 @@ public class TextureManager {
         drawLane(builder, GameState.getLane(Lane.Lanes.LEFT));
         drawLane(builder, GameState.getLane(Lane.Lanes.CENTER));
         drawLane(builder, GameState.getLane(Lane.Lanes.RIGHT));
+        drawCar(builder, GameState.getPlayerCar());
+    }
+
+    private static void drawCar(TextureBuilder builder, PlayerEntity playerCar) {
+        switch (playerCar.getLane()) {
+            case LEFT -> builder.add(playerCar.getTexture(), 50, 300, 1);
+            case CENTER -> builder.add(playerCar.getTexture(), 200, 300, 1);
+            case RIGHT -> builder.add(playerCar.getTexture(), 350, 300, 1);
+        }
     }
 
     private static void drawLane(TextureBuilder builder, Lane lane) {
