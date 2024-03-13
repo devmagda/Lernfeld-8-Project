@@ -24,10 +24,6 @@ public class GameState {
 
     }
 
-    private Set<Lanes> getLanes() {
-        return lanes.keySet();
-    }
-
     private void initLanes() {
         this.lanes = new HashMap<>();
         lanes.put(Lanes.LEFT, new Lane<>(
