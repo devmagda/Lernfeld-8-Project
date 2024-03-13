@@ -38,13 +38,7 @@ public class GUI {
     }
 
     public void update() {
-        Texture texture = TextureManager.createView();
-/*      int index = new Random().nextInt(TextureManager.getCarTextures().size());
-        Texture car = TextureManager.getCarTextures().get(index);
-        int x = new Random().nextInt(300);
-        int y = new Random().nextInt(300);
-        Texture texture = new TextureBuilder(TextureManager.getBackgroundTexture()).add(car, x, y, 1f).build();*/
-        setImage(texture);
+        setImage(TextureManager.createView());
     }
 
     private void setImage(Texture texture) {

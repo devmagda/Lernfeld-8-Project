@@ -27,8 +27,8 @@ public class Texture {
         this.height = height;
     }
 
-    public Texture(BufferedImage texture, String textureName, int width, int height) {
-        this(texture, DEFAULT_DRAW_INSTRUCTION, textureName, width, height);
+    public Texture(BufferedImage texture, String textureName) {
+        this(texture, DEFAULT_DRAW_INSTRUCTION, textureName, texture.getWidth(), texture.getHeight());
     }
 
     public Texture mirrored() {
@@ -62,10 +62,10 @@ public class Texture {
         LOWER_CENTER
     }
 
-    public static Texture fromFile(File file, int width, int height) {
+    public static Texture fromFile(File file) {
         if(file != null) {
             try {
-                return new Texture(ImageIO.read(file), file.getName(), width, height);
+                return new Texture(ImageIO.read(file), file.getName());
             } catch (IOException e) {
                 throw new RuntimeException("Could not load texture from file <" + file.getName() + ">");
             }
