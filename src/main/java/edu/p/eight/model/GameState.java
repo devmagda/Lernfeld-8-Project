@@ -79,7 +79,7 @@ public class GameState {
         for(Lanes lane : getStreetLanes()) {
             if(spawnCounter < LANE_COUNT) {
                 try {
-                    MovingEntity entity = lanes.get(lane).update(stats.speed, stats.spawnRate);
+                    MovingEntity entity = lanes.get(lane).update(Stats.speed, Stats.spawnRate);
                     lanes.get(lane).spawnEntity(entity);
                     spawnCounter++;
                 } catch (SpawningFailedException e) {
@@ -91,7 +91,7 @@ public class GameState {
         }
         for(Lanes lane : getDecoLanes()) {
             try {
-                MovingEntity entity = lanes.get(lane).update(stats.speed, stats.spawnRate);
+                MovingEntity entity = lanes.get(lane).update(Stats.speed, Stats.spawnRate);
                 lanes.get(lane).spawnEntity(entity);
             } catch (SpawningFailedException e) {
                 System.out.println("Spawning failed because of to many collisions");
