@@ -23,6 +23,7 @@ class Main {
         GameState.init();
 
         GUI gui = new GUI();
+        gui.update();
         gui.show();
 
         for(int i = 0; i < 0; i++) {

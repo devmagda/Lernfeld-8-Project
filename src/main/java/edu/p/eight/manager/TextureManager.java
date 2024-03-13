@@ -9,6 +9,7 @@ import edu.p.eight.utils.FileUtil;
 import edu.p.eight.view.Texture;
 
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class TextureManager {
@@ -101,6 +102,7 @@ public class TextureManager {
     }
 
     public static Texture createView() {
-        return null;
+        int index = new Random().nextInt(carTextures.size());
+        return getBackgroundTexture();
     }
 }
