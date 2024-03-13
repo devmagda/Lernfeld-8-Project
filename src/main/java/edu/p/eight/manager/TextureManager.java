@@ -1,5 +1,6 @@
 package edu.p.eight.manager;
 
+import edu.p.eight.model.GameState;
 import edu.p.eight.model.entity.DecoEntity;
 import edu.p.eight.model.entity.MovingEntity;
 import edu.p.eight.model.entity.PlayerEntity;
@@ -36,19 +37,19 @@ public class TextureManager {
     }
 
     private static List<Texture> loadCarTextures() {
-        return FileUtil.getFilesInDirectory("resources/entities/moving/").stream().map(f -> Texture.fromFile(f, MovingEntity.WIDTH, MovingEntity.HEIGHT)).collect(Collectors.toList());
+        return FileUtil.getFilesInDirectory(FileUtil.getBasePath()  + "entities/moving/").stream().map(f -> Texture.fromFile(f, MovingEntity.WIDTH, MovingEntity.HEIGHT)).collect(Collectors.toList());
     }
 
     private static List<Texture> loadStaticTextures() {
-        return FileUtil.getFilesInDirectory("resources/entities/static/").stream().map(f -> Texture.fromFile(f, DecoEntity.WIDTH, DecoEntity.HEIGHT)).collect(Collectors.toList());
+        return FileUtil.getFilesInDirectory(FileUtil.getBasePath()  + "entities/static/").stream().map(f -> Texture.fromFile(f, DecoEntity.WIDTH, DecoEntity.HEIGHT)).collect(Collectors.toList());
     }
 
     private static List<Texture> loadPlayerTextures() {
-        return FileUtil.getFilesInDirectory("resources/entities/player/").stream().map(f -> Texture.fromFile(f, PlayerEntity.WIDTH, PlayerEntity.HEIGHT)).collect(Collectors.toList());
+        return FileUtil.getFilesInDirectory(FileUtil.getBasePath()  + "entities/player/").stream().map(f -> Texture.fromFile(f, PlayerEntity.WIDTH, PlayerEntity.HEIGHT)).collect(Collectors.toList());
     }
 
     private static List<Texture> loadSpecialTextures() {
-        return FileUtil.getFilesInDirectory("resources/entities/special/").stream().map(f -> Texture.fromFile(f, StartEntity.WIDTH, StartEntity.HEIGHT)).collect(Collectors.toList());
+        return FileUtil.getFilesInDirectory(FileUtil.getBasePath()  + "entities/special/").stream().map(f -> Texture.fromFile(f, StartEntity.WIDTH, StartEntity.HEIGHT)).collect(Collectors.toList());
     }
 
     public static Texture loadStartTexture() {
@@ -97,5 +98,9 @@ public class TextureManager {
     private static void isInitialized() throws RuntimeException {
         if(!initialized)
             throw new RuntimeException("TextureManager is not initialized! This needs to be done first before trying to load textures ..");
+    }
+
+    public static Texture createView(GameState gameState) {
+        return null;
     }
 }

@@ -5,6 +5,9 @@ import edu.p.eight.manager.TextureManager;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -12,23 +15,23 @@ public class TextureManagerTest {
 
     @Before
     public void setup() {
-        // TextureManager.initialize();
+        TextureManager.initialize();
     }
 
     @Test
     public void testStartTexture() {
-        // assertEquals(TextureManager.DEFAULT_START_TEXTURE_NAME, TextureManager.getStartTexture().getTextureName());
+        assertEquals(TextureManager.DEFAULT_START_TEXTURE_NAME, TextureManager.getStartTexture().getTextureName());
     }
 
     @Test
     public void testBackgroundTexture() {
-        // assertEquals(TextureManager.DEFAULT_BACKGROUND_TEXTURE_NAME, TextureManager.getBackgroundTexture().getTextureName());
+        assertEquals(TextureManager.DEFAULT_BACKGROUND_TEXTURE_NAME, TextureManager.getBackgroundTexture().getTextureName());
     }
 
     @Test
     public void testListsNotEmpty() {
-        // assertNotNull(TextureManager.getCarTextures());
-        // assertNotNull(TextureManager.getDecoTextures());
-        // assertNotNull(TextureManager.getPlayerTextures());
+        assertNotNull(TextureManager.getCarTextures());
+        assertNotNull(TextureManager.getDecoTextures());
+        assertNotNull(TextureManager.getPlayerTextures());
     }
 }

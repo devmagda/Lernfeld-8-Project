@@ -1,5 +1,7 @@
 package edu.p.eight.model;
 
+import java.util.Properties;
+
 public class Stats {
 
     public static final float DEFAULT_SPEED = 5f;
@@ -16,6 +18,11 @@ public class Stats {
     }
 
     public Stats() {
-        this(DEFAULT_SPEED, DEFAULT_SPAWN_RATE, DEFAULT_INCREASE_RATE);
+
+    }
+
+    // TODO @Anne
+    public Stats fromProperties(Properties properties) {
+        return null;
     }
 }
