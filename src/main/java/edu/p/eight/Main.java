@@ -15,7 +15,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 class Main {
-    public static void main(String[] args) throws PlayerCrashedException, IOException {
+    public static void main(String[] args) throws PlayerCrashedException {
 
         // Has to be called first
         TextureManager.initialize();
@@ -23,11 +23,13 @@ class Main {
         GameState gameState = new GameState();
 
         GUI gui = new GUI();
+        gui.show();
 
         for(int i = 0; i < 0; i++) {
             gameState.update(Lane.LaneSwitchAction.NONE);
             System.out.println(gameState);
             gui.update(gameState);
+            gui.show();
         }
 
 
