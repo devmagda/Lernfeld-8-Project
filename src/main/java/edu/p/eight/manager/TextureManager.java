@@ -1,5 +1,9 @@
 package edu.p.eight.manager;
 
+import edu.p.eight.model.entity.DecoEntity;
+import edu.p.eight.model.entity.MovingEntity;
+import edu.p.eight.model.entity.PlayerEntity;
+import edu.p.eight.model.entity.StartEntity;
 import edu.p.eight.utils.FileUtil;
 import edu.p.eight.view.Texture;
 
@@ -7,18 +11,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TextureManager {
-
-
+    private static boolean initialized;
     public static final String DEFAULT_START_TEXTURE_NAME = "TemplateStart.png";
     public static final String DEFAULT_BACKGROUND_TEXTURE_NAME = "TemplateBackground.png";
-    private static Texture backgroundTexture;
 
+    private static Texture startTexture;
+    private static Texture backgroundTexture;
     private static List<Texture> carTextures;
     private static List<Texture> decoTextures;
     private static List<Texture> playerTextures;
-    private static Texture startTexture;
 
-    private static List<String> songs;
 
     /**
      * The AssetManager holds all the textures in memory for faster loading
@@ -30,23 +32,23 @@ public class TextureManager {
         playerTextures = loadPlayerTextures();
         startTexture = loadStartTexture();
         backgroundTexture = loadBackgroundTexture();
-        songs = getSongs();
+        initialized = true;
     }
 
     private static List<Texture> loadCarTextures() {
-        return FileUtil.getFilesInDirectory("entities/moving/").stream().map(Texture::fromFile).collect(Collectors.toList());
+        return FileUtil.getFilesInDirectory("resources/entities/moving/").stream().map(f -> Texture.fromFile(f, MovingEntity.WIDTH, MovingEntity.HEIGHT)).collect(Collectors.toList());
     }
 
     private static List<Texture> loadStaticTextures() {
-        return FileUtil.getFilesInDirectory("entities/static/").stream().map(Texture::fromFile).collect(Collectors.toList());
+        return FileUtil.getFilesInDirectory("resources/entities/static/").stream().map(f -> Texture.fromFile(f, DecoEntity.WIDTH, DecoEntity.HEIGHT)).collect(Collectors.toList());
     }
 
     private static List<Texture> loadPlayerTextures() {
-        return FileUtil.getFilesInDirectory("entities/player/").stream().map(Texture::fromFile).collect(Collectors.toList());
+        return FileUtil.getFilesInDirectory("resources/entities/player/").stream().map(f -> Texture.fromFile(f, PlayerEntity.WIDTH, PlayerEntity.HEIGHT)).collect(Collectors.toList());
     }
 
     private static List<Texture> loadSpecialTextures() {
-        return FileUtil.getFilesInDirectory("entities/special/").stream().map(Texture::fromFile).collect(Collectors.toList());
+        return FileUtil.getFilesInDirectory("resources/entities/special/").stream().map(f -> Texture.fromFile(f, StartEntity.WIDTH, StartEntity.HEIGHT)).collect(Collectors.toList());
     }
 
     public static Texture loadStartTexture() {
@@ -67,28 +69,33 @@ public class TextureManager {
         throw new RuntimeException("Could not find start texture");
     }
 
-    public static List<String> getSongs() {
-        return songs;
-    }
-
-
     public static List<Texture> getCarTextures() {
+        TextureManager.isInitialized();
         return carTextures;
     }
 
     public static List<Texture> getDecoTextures() {
+        TextureManager.isInitialized();
         return decoTextures;
     }
 
     public static List<Texture> getPlayerTextures() {
+        TextureManager.isInitialized();
         return playerTextures;
     }
 
     public static Texture getStartTexture() {
+        TextureManager.isInitialized();
         return startTexture;
     }
 
     public static Texture getBackgroundTexture() {
+        TextureManager.isInitialized();
         return backgroundTexture;
+    }
+
+    private static void isInitialized() throws RuntimeException {
+        if(!initialized)
+            throw new RuntimeException("TextureManager is not initialized! This needs to be done first before trying to load textures ..");
     }
 }

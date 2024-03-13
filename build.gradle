@@ -94,6 +94,8 @@ jar {
         include '**/*.*'
     }
 
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
     manifest {
         attributes(
                 'Main-Class': 'edu.p.eight.Main'

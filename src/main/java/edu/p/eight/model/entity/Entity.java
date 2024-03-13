@@ -53,4 +53,6 @@ public abstract class Entity {
     public Texture getTexture() {
         return texture;
     }
+
+
 }
