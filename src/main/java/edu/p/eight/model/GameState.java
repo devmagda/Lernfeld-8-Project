@@ -37,7 +37,6 @@ public class GameState {
 
     public static void update(LaneSwitchAction playerAction) throws PlayerCrashedException {
         checkCollisions();
-        playerCar.move(playerAction);
         updateLanes();
     }
 

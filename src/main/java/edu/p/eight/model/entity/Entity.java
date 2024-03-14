@@ -6,7 +6,7 @@ import edu.p.eight.view.Texture;
 import java.util.function.Function;
 
 public abstract class Entity {
-    public static final float DEFAULT_OVERLAPPING_DISTANCE = 1f;
+    public static final float DEFAULT_OVERLAPPING_DISTANCE = 0.1f;
     protected float distance;
     protected final Texture texture;
     protected final float overlappingDistance;

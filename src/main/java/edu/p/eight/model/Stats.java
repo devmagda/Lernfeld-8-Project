@@ -7,7 +7,7 @@ public class Stats {
     public static final float DEFAULT_SPEED = 0.05f;
     public static final float DEFAULT_SPAWN_RATE = 0.05f;
     public static final float DEFAULT_INCREASE_RATE = 0.05f;
-    public static final boolean DEFAULT_COLLISION = false;
+    public static final boolean DEFAULT_COLLISION = true;
     public static float speed;
     public static float spawnRate;
     public static float increaseRate;
