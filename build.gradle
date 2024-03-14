@@ -13,8 +13,11 @@ dependencies {
     implementation 'junit:junit:4.13'
     testImplementation 'junit:junit:4.13'
 
+    implementation 'de.articdive:jnoise-core:4.1.0'
+
     implementation 'com.h2database:h2:2.2.224'
     testImplementation 'com.h2database:h2:2.2.224'
+
 
     // https://mvnrepository.com/artifact/org.postgresql/postgresql
     implementation 'org.postgresql:postgresql:42.7.2'

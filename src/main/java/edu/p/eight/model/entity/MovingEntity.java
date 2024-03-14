@@ -11,8 +11,8 @@ public abstract class MovingEntity extends Entity {
 
     private boolean toBeRemoved = false;
 
-    protected MovingEntity(Texture texture) {
-        super(Lane.LENGTH, texture);
+    protected MovingEntity(Texture texture, boolean hasCollision) {
+        super(Lane.LENGTH, texture, hasCollision);
     }
 
     /**

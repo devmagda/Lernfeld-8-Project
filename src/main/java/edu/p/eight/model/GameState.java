@@ -24,18 +24,14 @@ public class GameState {
 
     private static void initLanes() {
         lanes = new HashMap<>();
-        lanes.put( Lanes.LEFT,       new Lane( StreetEntity::getRandom, DrawingFunctions::left));
-        lanes.put( Lanes.RIGHT,      new Lane( StreetEntity::getRandom, DrawingFunctions::right));
-        lanes.put( Lanes.CENTER,     new Lane( StreetEntity::getRandom, DrawingFunctions::center));
-        lanes.put( Lanes.DECO_LEFT,  new Lane( DecoEntity::getRandom,   DrawingFunctions::decoLeft));
-        lanes.put( Lanes.DECO_RIGHT, new Lane( DecoEntity::getRandom,   DrawingFunctions::decoRight));
+        lanes.put( Lanes.LEFT,       new Lane( StreetEntity::getRandom, DrawingFunctions::left      ));
+        lanes.put( Lanes.RIGHT,      new Lane( StreetEntity::getRandom, DrawingFunctions::right     ));
+        lanes.put( Lanes.CENTER,     new Lane( StreetEntity::getRandom, DrawingFunctions::center,   StreetEntity.getStartEntity()));
+        lanes.put( Lanes.DECO_LEFT,  new Lane( DecoEntity::getRandom,   DrawingFunctions::decoLeft  ));
+        lanes.put( Lanes.DECO_RIGHT, new Lane( DecoEntity::getRandom,   DrawingFunctions::decoRight ));
     }
 
     public static void update() throws PlayerCrashedException {
-        update(LaneSwitchAction.NONE);
-    }
-
-    public static void update(LaneSwitchAction playerAction) throws PlayerCrashedException {
         checkCollisions();
         updateLanes();
     }
@@ -43,7 +39,8 @@ public class GameState {
     public static void updateLanes() {
         int spawnCounter = 1;
         for(Lanes lane : getStreetLanes()) {
-            lanes.get(lane).update(Stats.speed);
+            int removedEntities = lanes.get(lane).update(Stats.speed);
+            Stats.carsPassed += removedEntities;
             if(spawnCounter < LANE_COUNT) {
                 try {
                     MovingEntity entity = lanes.get(lane).trySpawnCar(Stats.spawnRate);

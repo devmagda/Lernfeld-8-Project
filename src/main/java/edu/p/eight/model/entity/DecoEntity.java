@@ -6,12 +6,12 @@ import edu.p.eight.view.Texture;
 import java.util.Random;
 
 public class DecoEntity extends MovingEntity {
-    public static final float DEFAULT_SPAWN_RATE = 1/3;
+    public static final float DEFAULT_SPAWN_RATE = 0.3f;
 
     public static final Texture.DrawInstructions DEFAULT_DRAW_INSTRUCTIONS = Texture.DrawInstructions.LOWER_CENTER;
 
     public DecoEntity(Texture texture) {
-        super(texture);
+        super(texture, false);
     }
 
     /**

@@ -14,7 +14,7 @@ public class PlayerEntity extends Entity {
     private Lanes lane;
 
     public PlayerEntity(Texture texture, Lanes lane) {
-        super(0f, texture);
+        super(0f, texture, true);
         this.lane = lane;
     }
 

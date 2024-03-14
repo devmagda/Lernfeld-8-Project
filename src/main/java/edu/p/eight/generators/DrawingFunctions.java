@@ -1,44 +1,45 @@
 package edu.p.eight.generators;
 
 import edu.p.eight.model.Lane;
+import edu.p.eight.model.entity.MovingEntity;
 import edu.p.eight.view.Position;
 import edu.p.eight.view.Texture;
 
 public class DrawingFunctions {
-    public static Position decoLeft(float distance) {
+    public static Position decoLeft(MovingEntity entity) {
         Position start = Lane.DECO_LEFT_START;
         Position end = Lane.DECO_LEFT_END;
-        return baseFunction(start, end, distance);
+        return baseFunction(start, end, entity);
     }
 
-    public static Position left(float distance) {
+    public static Position left(MovingEntity entity) {
         Position start = Lane.LEFT_START;
         Position end = Lane.LEFT_END;
-        return baseFunction(start, end, distance);
+        return baseFunction(start, end, entity);
     }
 
-    public static Position center(float distance) {
+    public static Position center(MovingEntity entity) {
         Position start = Lane.CENTER_START;
         Position end = Lane.CENTER_END;
-        return baseFunction(start, end, distance);
+        return baseFunction(start, end, entity);
     }
 
-    public static Position right(float distance) {
+    public static Position right(MovingEntity entity) {
         Position start = Lane.RIGHT_START;
         Position end = Lane.RIGHT_END;
-        return baseFunction(start, end, distance);
+        return baseFunction(start, end, entity);
     }
 
-    public static Position decoRight(float distance) {
+    public static Position decoRight(MovingEntity entity) {
         Position start = Lane.DECO_RIGHT_START;
         Position end = Lane.DECO_RIGHT_END;
-        return baseFunction(start, end, distance);
+        return baseFunction(start, end, entity);
     }
 
-    private static Position baseFunction(Position start, Position end, float distance) {
+    private static Position baseFunction(Position start, Position end, MovingEntity entity) {
 
         // Get current factor from distance
-        float factor = getFactor(distance);
+        float factor = getFactor(entity.getDistance());
 
         // Gets total distance the car can travel from start to end
         float xDistance = start.getX() - end.getX();
@@ -48,12 +49,12 @@ public class DrawingFunctions {
         float x = start.getX() - factor * xDistance;
         float y = start.getY() - factor * yDistance;
 
-        float textureScale = Texture.DEFAULT_TEXTURE_SIZE * factor;
-        float halfTextureScale = textureScale / 2;
+        float textureScaleX = entity.getTexture().getWidth() * factor;
+        float textureScaleY = entity.getTexture().getHeight() * factor;
 
         // Shifted the object to be drawn on lower center instead
-        x = x - halfTextureScale;
-        y = y - textureScale;
+        x = x - textureScaleX / 2;
+        y = y - textureScaleY;
         return new Position(x, y, factor);
     }
 

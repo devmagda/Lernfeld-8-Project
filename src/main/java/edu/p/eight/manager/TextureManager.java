@@ -3,6 +3,7 @@ package edu.p.eight.manager;
 import edu.p.eight.builder.TextureBuilder;
 import edu.p.eight.model.GameState;
 import edu.p.eight.model.Lane;
+import edu.p.eight.model.Stats;
 import edu.p.eight.model.entity.DecoEntity;
 import edu.p.eight.model.entity.MovingEntity;
 import edu.p.eight.model.entity.PlayerEntity;
@@ -107,7 +108,15 @@ public class TextureManager {
     public static Texture createView() {
         TextureBuilder builder = new TextureBuilder(TextureManager.getBackgroundTexture());
         drawLanes(builder);
+        drawCar(builder, GameState.getPlayerCar());
+        drawScore(builder);
         return builder.build();
+    }
+
+    private static void drawScore(TextureBuilder builder) {
+        int actualScore = Stats.carsPassed == -1 ? 0 : Stats.carsPassed;
+        String text = "Cars passed: " + actualScore;
+        builder.addText(text, 100, 100);
     }
 
     private static void drawLanes(TextureBuilder builder) {
@@ -116,7 +125,7 @@ public class TextureManager {
         drawLane(builder, GameState.getLane(Lane.Lanes.LEFT));
         drawLane(builder, GameState.getLane(Lane.Lanes.CENTER));
         drawLane(builder, GameState.getLane(Lane.Lanes.RIGHT));
-        drawCar(builder, GameState.getPlayerCar());
+
     }
 
     private static void drawCar(TextureBuilder builder, PlayerEntity playerCar) {
@@ -130,7 +139,7 @@ public class TextureManager {
 
     private static void drawLane(TextureBuilder builder, Lane lane) {
         for(MovingEntity entity : lane.getEntities()) {
-            Position pos = lane.getDrawCalculations().apply(entity.getDistance());
+            Position pos = lane.getDrawCalculations().apply(entity);
             builder.add(entity.getTexture(), pos.getX().intValue(), pos.getY().intValue(), pos.getScale());
         }
     }

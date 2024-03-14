@@ -4,6 +4,7 @@ import edu.p.eight.exceptions.PlayerCrashedException;
 import edu.p.eight.manager.TextureManager;
 import edu.p.eight.model.GameState;
 import edu.p.eight.model.Lane;
+import edu.p.eight.model.Stats;
 import edu.p.eight.view.GUI;
 
 import java.util.Timer;
@@ -25,7 +26,8 @@ class Main {
             @Override
             public void run() {
                 try {
-                    GameState.update(Lane.LaneSwitchAction.NONE);
+                    GameState.update();
+                    Stats.update();
                     // GameState.printLanes();
                 } catch (PlayerCrashedException e) {
                     throw new RuntimeException(e);

@@ -33,6 +33,11 @@ public class TextureBuilder {
         return this;
     }
 
+    public TextureBuilder addText(String text, int x, int y) {
+        this.graphics.drawString(text, x, y);
+        return this;
+    }
+
     public Texture build() {
         this.graphics.dispose();
         return new Texture(this.result, Texture.DrawInstructions.UPPER_LEFT, this.name, this.width, this.height);

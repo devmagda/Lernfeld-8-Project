@@ -10,15 +10,17 @@ public abstract class Entity {
     protected float distance;
     protected final Texture texture;
     protected final float overlappingDistance;
+    protected boolean hasCollision;
 
-    protected Entity(float distance, Texture texture) {
-        this(distance, texture, DEFAULT_OVERLAPPING_DISTANCE);
+    protected Entity(float distance, Texture texture, boolean hasCollision) {
+        this(distance, texture, DEFAULT_OVERLAPPING_DISTANCE, hasCollision);
     }
 
-    protected Entity(float distance, Texture texture, float overlappingDistance) {
+    protected Entity(float distance, Texture texture, float overlappingDistance, boolean hasCollision) {
         this.distance = distance;
         this.texture = texture;
         this.overlappingDistance = overlappingDistance;
+        this.hasCollision = hasCollision;
     }
 
     /**
@@ -54,5 +56,7 @@ public abstract class Entity {
         return texture;
     }
 
-
+    public boolean hasCollision() {
+        return hasCollision;
+    }
 }

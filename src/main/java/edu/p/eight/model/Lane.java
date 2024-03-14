@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class Lane {
     public static final float LENGTH = 10F;
     private List<MovingEntity> entities;
-    private final Function<Float, Position> drawCalculations;
+    private final Function<MovingEntity, Position> drawCalculations;
     private final Supplier<MovingEntity> generator;
 
     public static final float Y_LOWER = 400;
@@ -38,7 +38,12 @@ public class Lane {
     public static final Position DECO_RIGHT_START = new Position(250, Y_UPPER, 1);
     public static final Position DECO_RIGHT_END = new Position(500, Y_LOWER, 1);
 
-    Lane(Supplier<MovingEntity> generator, Function<Float, Position> drawCalculations) {
+    Lane(Supplier<MovingEntity> generator, Function<MovingEntity, Position> drawCalculations, MovingEntity ... entities) {
+        this(generator, drawCalculations);
+        this.entities.addAll(List.of(entities));
+    }
+
+    Lane(Supplier<MovingEntity> generator, Function<MovingEntity, Position> drawCalculations) {
         if(drawCalculations == null || generator == null) {
             throw new RuntimeException("drawCalculations or generator cannot be null");
         }
@@ -47,9 +52,9 @@ public class Lane {
         this.entities = new ArrayList<>();
     }
 
-    public void update(float distance) {
+    public int update(float distance) {
         updateCars(distance);
-        removeDeadEntities();
+        return removeDeadEntities();
     }
 
     public void spawnEntity(MovingEntity car) {
@@ -68,7 +73,7 @@ public class Lane {
     }
 
     private boolean hasSpace(Entity other) {
-        boolean value = entities.stream().filter(car -> Entity.overlaps(car, other)).count() == 0;
+        boolean value = entities.stream().filter(entity -> Entity.overlaps(entity, other) && entity.hasCollision()).count() == 0;
         return value;
     }
 
@@ -100,10 +105,10 @@ public class Lane {
         return !lane.hasSpace(entity);
     }
 
-    public void removeDeadEntities() {
+    public int removeDeadEntities() {
         int size = this.entities.size();
         this.entities = entities.stream().filter(entity -> !entity.isDead()).collect(Collectors.toList());
-        System.out.println("Removed " + (size - this.entities.size()) + " objects");
+        return size - this.entities.size();
     }
 
     private String lineString() {
@@ -142,7 +147,7 @@ public class Lane {
         return this.entities;
     }
 
-    public Function<Float, Position> getDrawCalculations() {
+    public Function<MovingEntity, Position> getDrawCalculations() {
         return drawCalculations;
     }
 
