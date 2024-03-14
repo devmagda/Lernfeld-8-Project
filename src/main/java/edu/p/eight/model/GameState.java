@@ -47,10 +47,7 @@ public class GameState {
                     lanes.get(lane).spawnEntity(entity);
                     spawnCounter++;
                 } catch (SpawningFailedException e) {
-                    System.out.println(e.getMessage());
                 }
-            } else {
-                System.out.println("SpawnCount Failure");
             }
         }
         for(Lanes lane : getDecoLanes()) {
@@ -59,7 +56,6 @@ public class GameState {
                 MovingEntity entity = lanes.get(lane).trySpawnCar(Stats.spawnRate);
                 lanes.get(lane).spawnEntity(entity);
             } catch (SpawningFailedException e) {
-                System.out.println("Spawning failed because of to many collisions");
             }
         }
     }
@@ -72,14 +68,6 @@ public class GameState {
 
     public static Lane getLane(Lanes lane) {
         return lanes.get(lane);
-    }
-
-    public static void printLanes() {
-        System.out.println(lanes.get(Lanes.DECO_LEFT));
-        System.out.println(lanes.get(Lanes.LEFT));
-        System.out.println(lanes.get(Lanes.CENTER));
-        System.out.println(lanes.get(Lanes.RIGHT));
-        System.out.println(lanes.get(Lanes.DECO_RIGHT));
     }
 
     public static PlayerEntity getPlayerCar() {

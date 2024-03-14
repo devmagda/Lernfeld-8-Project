@@ -81,7 +81,7 @@ public class Lane {
         MovingEntity testObject = generator.get();
         float random = (float) Math.random();
         if (testObject instanceof DecoEntity) {
-            float actualChance = DecoEntity.DEFAULT_SPAWN_RATE;
+            float actualChance = Stats.decoSpawnRate;
             return actualChance > random;
         }
         if(testObject instanceof StreetEntity) {
