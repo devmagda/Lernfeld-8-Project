@@ -22,7 +22,8 @@ public abstract class MovingEntity extends Entity {
      */
     public void forward(float distance) throws EndOfLaneException {
         this.distance -= distance;
-        if(distance < 0) {
+        System.out.println("Distance: " + this.distance);
+        if(this.distance < 0) {
             throw new EndOfLaneException("Car has reached the end of the lane ..");
         }
     }

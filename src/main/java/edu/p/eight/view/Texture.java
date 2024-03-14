@@ -12,6 +12,7 @@ public class Texture {
     public static final  DrawInstructions DEFAULT_DRAW_INSTRUCTION = DrawInstructions.CENTER;
     public static final int DEFAULT_BACKGROUND_WIDTH = 500;
     public static final int DEFAULT_BACKGROUND_HEIGHT = 400;
+    public static final int DEFAULT_TEXTURE_SIZE = 100;
     private final BufferedImage texture;
     private DrawInstructions instruction;
     private final String textureName;

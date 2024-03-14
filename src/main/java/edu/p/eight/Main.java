@@ -26,7 +26,7 @@ class Main {
             public void run() {
                 try {
                     GameState.update(Lane.LaneSwitchAction.NONE);
-                    GameState.printLanes();
+                    // GameState.printLanes();
                 } catch (PlayerCrashedException e) {
                     throw new RuntimeException(e);
                 }

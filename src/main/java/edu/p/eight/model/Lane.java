@@ -20,20 +20,23 @@ public class Lane {
     private final Function<Float, Position> drawCalculations;
     private final Supplier<MovingEntity> generator;
 
-    public static final Position DECO_LEFT_START = new Position(248, 100, 1);
-    public static final Position DECO_LEFT_END = new Position(0, 400, 1);
+    public static final float Y_LOWER = 400;
+    public static final float Y_UPPER = 98;
 
-    public static final Position LEFT_START = new Position(249, 100, 1);
-    public static final Position LEFT_END = new Position(100, 400, 1);
+    public static final Position DECO_LEFT_START = new Position(250, Y_UPPER, 1);
+    public static final Position DECO_LEFT_END = new Position(0, Y_LOWER, 1);
 
-    public static final Position CENTER_START = new Position(250, 100, 1);
-    public static final Position CENTER_END = new Position(250, 400, 1);
+    public static final Position LEFT_START = new Position(250, Y_UPPER, 1);
+    public static final Position LEFT_END = new Position(100, Y_LOWER, 1);
 
-    public static final Position RIGHT_START = new Position(251, 100, 1);
-    public static final Position RIGHT_END = new Position(400, 400, 1);
+    public static final Position CENTER_START = new Position(250, Y_UPPER, 1);
+    public static final Position CENTER_END = new Position(250, Y_LOWER, 1);
 
-    public static final Position DECO_RIGHT_START = new Position(252, 100, 1);
-    public static final Position DECO_RIGHT_END = new Position(500, 400, 1);
+    public static final Position RIGHT_START = new Position(250, Y_UPPER, 1);
+    public static final Position RIGHT_END = new Position(400, Y_LOWER, 1);
+
+    public static final Position DECO_RIGHT_START = new Position(250, Y_UPPER, 1);
+    public static final Position DECO_RIGHT_END = new Position(500, Y_LOWER, 1);
 
     Lane(Supplier<MovingEntity> generator, Function<Float, Position> drawCalculations) {
         if(drawCalculations == null || generator == null) {
@@ -98,7 +101,9 @@ public class Lane {
     }
 
     public void removeDeadEntities() {
+        int size = this.entities.size();
         this.entities = entities.stream().filter(entity -> !entity.isDead()).collect(Collectors.toList());
+        System.out.println("Removed " + (size - this.entities.size()) + " objects");
     }
 
     private String lineString() {

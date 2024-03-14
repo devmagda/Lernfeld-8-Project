@@ -120,10 +120,11 @@ public class TextureManager {
     }
 
     private static void drawCar(TextureBuilder builder, PlayerEntity playerCar) {
+        int y = 350;
         switch (playerCar.getLane()) {
-            case LEFT -> builder.add(playerCar.getTexture(), 50, 300, 1);
-            case CENTER -> builder.add(playerCar.getTexture(), 200, 300, 1);
-            case RIGHT -> builder.add(playerCar.getTexture(), 350, 300, 1);
+            case LEFT ->   builder.add(playerCar.getTexture(), 50,  y, 1);
+            case CENTER -> builder.add(playerCar.getTexture(), 200, y, 1);
+            case RIGHT ->  builder.add(playerCar.getTexture(), 350, y, 1);
         }
     }
 
