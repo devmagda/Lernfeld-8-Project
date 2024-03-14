@@ -5,13 +5,17 @@ import edu.p.eight.manager.TextureManager;
 import edu.p.eight.model.GameState;
 import edu.p.eight.model.Lane;
 import edu.p.eight.model.Stats;
+import edu.p.eight.utils.MusicUtil;
 import edu.p.eight.view.GUI;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 class Main {
-    public static void main(String[] args) throws PlayerCrashedException {
+    public static void main(String[] args) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
 
         // Has to be called first
         TextureManager.initialize();
@@ -21,6 +25,8 @@ class Main {
         GUI gui = new GUI();
         gui.show();
 
+        MusicUtil.playRandom();
+
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
@@ -28,9 +34,11 @@ class Main {
                 try {
                     GameState.update();
                     Stats.update();
+
                     // GameState.printLanes();
                 } catch (PlayerCrashedException e) {
                     Stats.dead = true;
+                    MusicUtil.stop();
                 }
                 gui.update();
             }
