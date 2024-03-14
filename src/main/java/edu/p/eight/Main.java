@@ -30,7 +30,7 @@ class Main {
                     Stats.update();
                     // GameState.printLanes();
                 } catch (PlayerCrashedException e) {
-                    throw new RuntimeException(e);
+                    Stats.dead = true;
                 }
                 gui.update();
             }
