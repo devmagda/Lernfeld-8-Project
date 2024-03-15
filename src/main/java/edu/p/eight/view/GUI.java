@@ -1,5 +1,8 @@
 package edu.p.eight.view;
 
+import edu.p.eight.actions.MoveAction;
+import edu.p.eight.actions.MoveLeftAction;
+import edu.p.eight.actions.MoveRightAction;
 import edu.p.eight.builder.TextureBuilder;
 import edu.p.eight.manager.TextureManager;
 import edu.p.eight.model.GameState;
@@ -22,34 +25,33 @@ public class GUI {
     private JLabel imageLabel;
 
     public GUI(String name, int width, int height) {
-        this.gameFrame = new JFrame(name);
         this.imageLabel = new JLabel();
+        initFrame(name, width, height);
+        mapInput();
+    }
+
+    private void initFrame(String name, int width, int height) {
+        this.gameFrame = new JFrame(name);
         gameFrame.setSize(width, height);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameFrame.add(imageLabel);
+    }
+
+    private void mapInput() {
+        MoveAction left = new MoveLeftAction();
+        MoveAction right = new MoveRightAction();
 
         InputMap im = gameFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        im.put( right.keyStroke, right.key);
+        im.put( left.keyStroke,  left.key);
+
         ActionMap am = gameFrame.getRootPane().getActionMap();
-
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_A,0), "left");
-        am.put("left", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                GameState.getPlayerCar().moveLeft();
-            }
-        });
-
-        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_D,0), "right");
-        am.put("right", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                GameState.getPlayerCar().moveRight();
-            }
-        });
+        am.put( right.key, right);
+        am.put( left.key,  left);
     }
 
     public GUI(String name) {
-        this(name, Texture.DEFAULT_BACKGROUND_WIDTH, Texture.DEFAULT_BACKGROUND_HEIGHT);
+        this(name, TextureManager.getBackgroundTexture().getWidth(), TextureManager.getBackgroundTexture().getHeight());
     }
 
     public GUI() {
