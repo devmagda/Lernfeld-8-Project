@@ -143,13 +143,4 @@ public class TextureManager {
             builder.add(entity.getTexture(), pos.getX().intValue(), pos.getY().intValue(), pos.getScale());
         }
     }
-
-    public static Texture createRandomView() {
-        int index = new Random().nextInt(TextureManager.getCarTextures().size());
-        Texture car = TextureManager.getCarTextures().get(index);
-        int x = new Random().nextInt(300);
-        int y = new Random().nextInt(300);
-        Texture texture = new TextureBuilder(TextureManager.getBackgroundTexture()).add(car, x, y, 1f).build();
-        return texture;
-    }
 }
