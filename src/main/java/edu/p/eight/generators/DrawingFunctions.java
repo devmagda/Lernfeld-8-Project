@@ -60,7 +60,9 @@ public class DrawingFunctions {
 
     private static float getFactor(float distance) {
         float factor = (Lane.LENGTH-distance)/Lane.LENGTH;
-        return factor * factor * factor * factor + 0.0001f;
+        return factor * factor * factor * factor; // x^4
+        // return -1f * ((factor - 1f) * (factor - 1f) * (factor - 1f) * (factor - 1f)) + 1; // -(x-1)^4+1
+        //return factor;
         // return 1 + 1/3* distance;
     }
 }
