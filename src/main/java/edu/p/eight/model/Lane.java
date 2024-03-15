@@ -58,7 +58,7 @@ public class Lane {
     }
 
     public void spawnEntity(MovingEntity car) {
-            entities.add(car);
+            entities.add(0, car);
     }
 
     public MovingEntity trySpawnCar(float chance) throws SpawningFailedException {
