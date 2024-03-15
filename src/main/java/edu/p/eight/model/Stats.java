@@ -6,9 +6,9 @@ import java.util.Properties;
 
 public class Stats {
 
-    public static final float DEFAULT_SPEED = 0.1f;
-    public static final float DEFAULT_SPAWN_RATE = 0.05f;
-    public static final float DEFAULT_INCREASE_RATE = 1.1f;
+    public static final float DEFAULT_SPEED = 0.07f;
+    public static final float DEFAULT_SPAWN_RATE = 0.03f;
+    public static final float DEFAULT_INCREASE_RATE = 1.2f;
     public static final boolean DEFAULT_COLLISION = true;
     public static final float DEFAULT_DECO_SPAWN_RATE = 0.1f;
     public static final long DEFAULT_ROUND_LENGTH_MS = 10000;
@@ -46,9 +46,5 @@ public class Stats {
             spawnRate = spawnRate * (increaseRate);
             timeStampLastUpdate = new Date().getTime();
         }
-    }
-
-    public static void print() {
-        System.out.println("Speed:" + speed + "\nSpawnRate: " + spawnRate + "\nCars passed: " + carsPassed);
     }
 }
