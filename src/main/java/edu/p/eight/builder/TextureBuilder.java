@@ -1,9 +1,13 @@
 package edu.p.eight.builder;
 
+import edu.p.eight.model.entity.Entity;
+import edu.p.eight.model.entity.MovingEntity;
+import edu.p.eight.view.Position;
 import edu.p.eight.view.Texture;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.function.Function;
 
 public class TextureBuilder {
     private int width;
@@ -30,6 +34,12 @@ public class TextureBuilder {
 
     public TextureBuilder add(Texture texture, int x, int y, float scale) {
         this.graphics.drawImage(texture.getTexture(), x, y, (int)(texture.getWidth() * scale), (int)(texture.getHeight() * scale), null);
+        return this;
+    }
+
+    public TextureBuilder add(Entity entity, Function<Entity, Position> drawInstruction) {
+        Position pos = drawInstruction.apply(entity);
+        add(entity.getTexture(), pos.getX().intValue(), pos.getY().intValue(), pos.getScale());
         return this;
     }
 

@@ -1,5 +1,6 @@
 package edu.p.eight.model.entity;
 
+import edu.p.eight.model.Lane;
 import edu.p.eight.view.Texture;
 
 import static edu.p.eight.model.Lane.*;
@@ -14,7 +15,7 @@ public class PlayerEntity extends Entity {
     private Lanes lane;
 
     public PlayerEntity(Texture texture, Lanes lane) {
-        super(0f, texture, true);
+        super(LENGTH * 0.2f, texture, true);
         this.lane = lane;
     }
 
@@ -58,5 +59,9 @@ public class PlayerEntity extends Entity {
             case RIGHT , CENTER -> this.lane = Lanes.RIGHT;
             case LEFT -> this.lane = Lanes.CENTER;
         }
+    }
+
+    public void setDistance(float distance) {
+        this.distance = distance;
     }
 }

@@ -1,5 +1,6 @@
 package edu.p.eight.model.entity;
 
+import edu.p.eight.exceptions.EndOfLaneException;
 import edu.p.eight.view.Position;
 import edu.p.eight.view.Texture;
 
@@ -9,6 +10,7 @@ public abstract class Entity {
     public static final float DEFAULT_OVERLAPPING_DISTANCE = 0.1f;
     protected float distance;
     protected final Texture texture;
+    protected boolean toBeRemoved = false;
     protected final float overlappingDistance;
     protected boolean hasCollision;
 
@@ -21,6 +23,7 @@ public abstract class Entity {
         this.texture = texture;
         this.overlappingDistance = overlappingDistance;
         this.hasCollision = hasCollision;
+        this.toBeRemoved = false;
     }
 
     /**
@@ -58,5 +61,41 @@ public abstract class Entity {
 
     public boolean hasCollision() {
         return hasCollision;
+    }
+
+
+    /**
+     * Marks a car as dead. It will be removed once we check for alive cars
+     */
+    public void markDead() {
+        this.toBeRemoved = true;
+    }
+
+    /**
+     * Checks, if a car is dead
+     * @return true if the car is dead
+     */
+    public boolean isDead() {
+        return this.toBeRemoved;
+    }
+
+
+    /**
+     * Moves the moving object closer to the player position
+     * @param distance the distance to move the car forward in "3d" space
+     * @throws EndOfLaneException thrown, when a car reaches the end of the street (used for handling car removing)
+     */
+    public void forward(float distance) throws EndOfLaneException {
+        this.distance -= distance;
+        if(this.distance < 0) {
+            throw new EndOfLaneException("Car has reached the end of the lane ..");
+        }
+    }
+
+    public void backward(float distance) throws EndOfLaneException {
+        this.distance += distance;
+        if(this.distance < 0) {
+            throw new EndOfLaneException("Car has reached the end of the lane ..");
+        }
     }
 }

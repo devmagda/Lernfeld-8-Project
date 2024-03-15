@@ -1,23 +1,12 @@
 package edu.p.eight.view;
 
-import edu.p.eight.actions.MoveAction;
-import edu.p.eight.actions.MoveLeftAction;
-import edu.p.eight.actions.MoveRightAction;
-import edu.p.eight.builder.TextureBuilder;
+import edu.p.eight.actions.*;
 import edu.p.eight.manager.TextureManager;
-import edu.p.eight.model.GameState;
-import edu.p.eight.model.Lane;
-import edu.p.eight.view.Texture;
+import edu.p.eight.utils.TextureUtil;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-import java.util.Random;
-
 
 
 public class GUI {
@@ -40,14 +29,20 @@ public class GUI {
     private void mapInput() {
         MoveAction left = new MoveLeftAction();
         MoveAction right = new MoveRightAction();
+        MoveAction forward = new MoveForwardAction();
+        MoveAction backward = new MoveBackwardAction();
 
         InputMap im = gameFrame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
-        im.put( right.keyStroke, right.key);
-        im.put( left.keyStroke,  left.key);
+        im.put(right.keyStroke, right.key);
+        im.put(left.keyStroke, left.key);
+        im.put(forward.keyStroke, forward.key);
+        im.put(backward.keyStroke, backward.key);
 
         ActionMap am = gameFrame.getRootPane().getActionMap();
-        am.put( right.key, right);
-        am.put( left.key,  left);
+        am.put(right.key, right);
+        am.put(left.key, left);
+        am.put(forward.key, forward);
+        am.put(backward.key, backward);
     }
 
     public GUI(String name) {
@@ -63,7 +58,7 @@ public class GUI {
     }
 
     public void update() {
-        setImage(TextureManager.createView());
+        setImage(TextureUtil.createView());
     }
 
     private void setImage(Texture texture) {

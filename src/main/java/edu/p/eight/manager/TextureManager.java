@@ -104,43 +104,4 @@ public class TextureManager {
         if(!initialized)
             throw new RuntimeException("TextureManager is not initialized! This needs to be done first before trying to load textures ..");
     }
-
-    public static Texture createView() {
-        TextureBuilder builder = new TextureBuilder(TextureManager.getBackgroundTexture());
-        drawLanes(builder);
-        drawCar(builder, GameState.getPlayerCar());
-        drawScore(builder);
-        return builder.build();
-    }
-
-    private static void drawScore(TextureBuilder builder) {
-        int actualScore = Stats.carsPassed == -1 ? 0 : Stats.carsPassed;
-        String text = "Cars passed: " + actualScore;
-        builder.addText(text, 100, 100);
-    }
-
-    private static void drawLanes(TextureBuilder builder) {
-        drawLane(builder, GameState.getLane(Lane.Lanes.DECO_LEFT));
-        drawLane(builder, GameState.getLane(Lane.Lanes.DECO_RIGHT));
-        drawLane(builder, GameState.getLane(Lane.Lanes.LEFT));
-        drawLane(builder, GameState.getLane(Lane.Lanes.CENTER));
-        drawLane(builder, GameState.getLane(Lane.Lanes.RIGHT));
-
-    }
-
-    private static void drawCar(TextureBuilder builder, PlayerEntity playerCar) {
-        int y = 350;
-        switch (playerCar.getLane()) {
-            case LEFT ->   builder.add(playerCar.getTexture(), 50,  y, 1);
-            case CENTER -> builder.add(playerCar.getTexture(), 200, y, 1);
-            case RIGHT ->  builder.add(playerCar.getTexture(), 350, y, 1);
-        }
-    }
-
-    private static void drawLane(TextureBuilder builder, Lane lane) {
-        for(MovingEntity entity : lane.getEntities()) {
-            Position pos = lane.getDrawCalculations().apply(entity);
-            builder.add(entity.getTexture(), pos.getX().intValue(), pos.getY().intValue(), pos.getScale());
-        }
-    }
 }

@@ -5,8 +5,11 @@ import edu.p.eight.exceptions.SpawningFailedException;
 import edu.p.eight.generators.DrawingFunctions;
 import edu.p.eight.manager.TextureManager;
 import edu.p.eight.model.entity.*;
+import edu.p.eight.view.Position;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static edu.p.eight.model.Lane.*;
 
@@ -43,7 +46,7 @@ public class GameState {
             Stats.carsPassed += removedEntities;
             if(spawnCounter < LANE_COUNT) {
                 try {
-                    MovingEntity entity = lanes.get(lane).trySpawnCar(Stats.spawnRate);
+                    Entity entity = lanes.get(lane).trySpawnCar(Stats.spawnRate);
                     lanes.get(lane).spawnEntity(entity);
                     spawnCounter++;
                 } catch (SpawningFailedException e) {
@@ -53,7 +56,7 @@ public class GameState {
         for(Lanes lane : getDecoLanes()) {
             try {
                 lanes.get(lane).update(Stats.speed);
-                MovingEntity entity = lanes.get(lane).trySpawnCar(Stats.spawnRate);
+                Entity entity = lanes.get(lane).trySpawnCar(Stats.spawnRate);
                 lanes.get(lane).spawnEntity(entity);
             } catch (SpawningFailedException e) {
             }
@@ -72,5 +75,18 @@ public class GameState {
 
     public static PlayerEntity getPlayerCar() {
         return playerCar;
+    }
+
+    public static Map<Entity, Function<Entity, Position>> getDrawingMap() {
+        Map<Entity, Function<Entity, Position>> drawingMap = new HashMap();
+        lanes.get( Lanes.DECO_LEFT  ).getEntities().stream().forEach(e -> drawingMap.put(e, lanes.get(Lanes.DECO_LEFT).getDrawCalculations()));
+        lanes.get( Lanes.LEFT       ).getEntities().stream().forEach(e -> drawingMap.put(e, lanes.get(Lanes.LEFT).getDrawCalculations()));
+        lanes.get( Lanes.CENTER     ).getEntities().stream().forEach(e -> drawingMap.put(e, lanes.get(Lanes.CENTER).getDrawCalculations()));
+        lanes.get( Lanes.RIGHT      ).getEntities().stream().forEach(e -> drawingMap.put(e, lanes.get(Lanes.RIGHT).getDrawCalculations()));
+        lanes.get( Lanes.DECO_RIGHT ).getEntities().stream().forEach(e -> drawingMap.put(e, lanes.get(Lanes.DECO_RIGHT).getDrawCalculations()));
+
+        drawingMap.put(playerCar, lanes.get(playerCar.getLane()).getDrawCalculations());
+
+        return drawingMap;
     }
 }

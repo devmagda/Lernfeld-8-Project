@@ -1,42 +1,43 @@
 package edu.p.eight.generators;
 
 import edu.p.eight.model.Lane;
+import edu.p.eight.model.entity.Entity;
 import edu.p.eight.model.entity.MovingEntity;
 import edu.p.eight.view.Position;
 import edu.p.eight.view.Texture;
 
 public class DrawingFunctions {
-    public static Position decoLeft(MovingEntity entity) {
+    public static Position decoLeft(Entity entity) {
         Position start = Lane.DECO_LEFT_START;
         Position end = Lane.DECO_LEFT_END;
         return baseFunction(start, end, entity);
     }
 
-    public static Position left(MovingEntity entity) {
+    public static Position left(Entity entity) {
         Position start = Lane.LEFT_START;
         Position end = Lane.LEFT_END;
         return baseFunction(start, end, entity);
     }
 
-    public static Position center(MovingEntity entity) {
+    public static Position center(Entity entity) {
         Position start = Lane.CENTER_START;
         Position end = Lane.CENTER_END;
         return baseFunction(start, end, entity);
     }
 
-    public static Position right(MovingEntity entity) {
+    public static Position right(Entity entity) {
         Position start = Lane.RIGHT_START;
         Position end = Lane.RIGHT_END;
         return baseFunction(start, end, entity);
     }
 
-    public static Position decoRight(MovingEntity entity) {
+    public static Position decoRight(Entity entity) {
         Position start = Lane.DECO_RIGHT_START;
         Position end = Lane.DECO_RIGHT_END;
         return baseFunction(start, end, entity);
     }
 
-    private static Position baseFunction(Position start, Position end, MovingEntity entity) {
+    private static Position baseFunction(Position start, Position end, Entity entity) {
 
         // Get current factor from distance
         float factor = getFactor(entity.getDistance());

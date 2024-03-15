@@ -23,6 +23,8 @@ public class MusicUtil {
     }
 
     public static void stop() {
-        clip.stop();
+        if(clip != null) {
+            clip.stop();
+        }
     }
 }
