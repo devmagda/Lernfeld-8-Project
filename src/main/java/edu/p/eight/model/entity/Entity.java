@@ -6,15 +6,15 @@ import edu.p.eight.view.Texture;
 
 import java.util.function.Function;
 
-public abstract class Entity {
+public class Entity {
     public static final float DEFAULT_OVERLAPPING_DISTANCE = 0.1f;
     protected float distance;
     protected final Texture texture;
     protected boolean toBeRemoved = false;
-    protected final float overlappingDistance;
+    protected float   overlappingDistance;
     protected boolean hasCollision;
 
-    protected Entity(float distance, Texture texture, boolean hasCollision) {
+    public Entity(float distance, Texture texture, boolean hasCollision) {
         this(distance, texture, DEFAULT_OVERLAPPING_DISTANCE, hasCollision);
     }
 
@@ -44,6 +44,9 @@ public abstract class Entity {
     public static boolean overlaps(Entity a, Entity b) {
         float overlap = Math.abs(a.distance - b.distance);
         return overlap < a.overlappingDistance || overlap < b.overlappingDistance;
+    }
+    public void setOverlappingDistance(float overlappingDistance) {
+        this.overlappingDistance = overlappingDistance;
     }
 
     @Override
