@@ -25,7 +25,7 @@ class Main {
         GUI gui = new GUI();
         gui.show();
 
-        // MusicUtil.playRandom();
+        MusicUtil.playRandom();
 
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {

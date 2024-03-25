@@ -20,12 +20,15 @@ public class TextureManager {
     private static boolean initialized;
     public static final String DEFAULT_START_TEXTURE_NAME = "TemplateStart.png";
     public static final String DEFAULT_BACKGROUND_TEXTURE_NAME = "TemplateBackground.png";
+    public static final String DEFAULT_OVERLAY_TEXTURE_NAME = "TemplateOverlay.png";
 
     private static Texture startTexture;
     private static Texture backgroundTexture;
+    private static Texture overlayTexture;
     private static List<Texture> carTextures;
     private static List<Texture> decoTextures;
     private static List<Texture> playerTextures;
+
 
 
     /**
@@ -39,6 +42,7 @@ public class TextureManager {
         startTexture = loadStartTexture();
         backgroundTexture = loadBackgroundTexture();
         initialized = true;
+        overlayTexture = loadOverlayTexture();
     }
 
     private static List<Texture> loadCarTextures() {
@@ -60,6 +64,15 @@ public class TextureManager {
     public static Texture loadStartTexture() {
         for(Texture texture : loadSpecialTextures()) {
             if(DEFAULT_START_TEXTURE_NAME.equals(texture.getTextureName())) {
+                return texture;
+            }
+        }
+        throw new RuntimeException("Could not find start texture");
+    }
+
+    public static Texture loadOverlayTexture() {
+        for(Texture texture : loadSpecialTextures()) {
+            if(DEFAULT_OVERLAY_TEXTURE_NAME.equals(texture.getTextureName())) {
                 return texture;
             }
         }
@@ -98,6 +111,10 @@ public class TextureManager {
     public static Texture getBackgroundTexture() {
         TextureManager.isInitialized();
         return backgroundTexture;
+    }
+
+    public static Texture getOverlayTexture() {
+        return overlayTexture;
     }
 
     private static void isInitialized() throws RuntimeException {

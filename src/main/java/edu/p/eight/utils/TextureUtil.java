@@ -21,7 +21,13 @@ public class TextureUtil {
         TextureBuilder builder = new TextureBuilder(TextureManager.getBackgroundTexture());
         drawGameState(builder);
         drawScore(builder);
+        drawOverlay(builder);
         return builder.build();
+    }
+
+    private static void drawOverlay(TextureBuilder builder) {
+        Texture texture = TextureManager.getOverlayTexture();
+        builder.add(texture, 0, 0, 1);
     }
 
     private static void drawScore(TextureBuilder builder) {

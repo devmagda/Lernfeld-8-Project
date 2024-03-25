@@ -4,12 +4,15 @@ import edu.p.eight.exceptions.PlayerCrashedException;
 import edu.p.eight.exceptions.SpawningFailedException;
 import edu.p.eight.generators.DrawingFunctions;
 import edu.p.eight.manager.TextureManager;
-import edu.p.eight.model.entity.*;
+import edu.p.eight.model.entity.DecoEntity;
+import edu.p.eight.model.entity.Entity;
+import edu.p.eight.model.entity.PlayerEntity;
+import edu.p.eight.model.entity.StreetEntity;
 import edu.p.eight.view.Position;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import static edu.p.eight.model.Lane.*;
 
@@ -50,6 +53,7 @@ public class GameState {
                     lanes.get(lane).spawnEntity(entity);
                     spawnCounter++;
                 } catch (SpawningFailedException e) {
+                    System.out.println("Spawning car failed .. but its okay");
                 }
             }
         }
@@ -59,6 +63,7 @@ public class GameState {
                 Entity entity = lanes.get(lane).trySpawnCar(Stats.spawnRate);
                 lanes.get(lane).spawnEntity(entity);
             } catch (SpawningFailedException e) {
+                System.out.println("Spawning deco failed .. but its okay");
             }
         }
     }
