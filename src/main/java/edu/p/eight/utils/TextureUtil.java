@@ -20,8 +20,8 @@ public class TextureUtil {
     public static Texture createView() {
         TextureBuilder builder = new TextureBuilder(TextureManager.getBackgroundTexture());
         drawGameState(builder);
-        drawScore(builder);
         drawOverlay(builder);
+        drawScore(builder);
         return builder.build();
     }
 
@@ -33,7 +33,7 @@ public class TextureUtil {
     private static void drawScore(TextureBuilder builder) {
         int actualScore = Stats.carsPassed == -1 ? 0 : Stats.carsPassed;
         String text = "Cars passed: " + actualScore;
-        builder.addText(text, 100, 100);
+        builder.addText(text, 5, 380);
     }
 
     private static void drawGameState(TextureBuilder builder) {
