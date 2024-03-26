@@ -8,17 +8,17 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-public class MoveBackwardAction extends MoveAction {
+public class InputForwardAction extends InputAction {
 
-    public MoveBackwardAction() {
-        super(KeyStroke.getKeyStroke(KeyEvent.VK_S,0), "backward");
+    public InputForwardAction() {
+        super(KeyStroke.getKeyStroke(KeyEvent.VK_W,0), "forward");
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         float distanceBefore = GameState.getPlayerCar().getDistance();
         try {
-            GameState.getPlayerCar().backward(Stats.speed * -0.33f);
+            GameState.getPlayerCar().forward(Stats.speed * -0.33f);
         } catch (EndOfLaneException ex) {
             GameState.getPlayerCar().setDistance(distanceBefore);
         }

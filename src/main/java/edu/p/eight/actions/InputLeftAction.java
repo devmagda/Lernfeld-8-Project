@@ -6,14 +6,14 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-public class MoveRightAction extends MoveAction {
+public class InputLeftAction extends InputAction {
 
-    public MoveRightAction() {
-        super(KeyStroke.getKeyStroke(KeyEvent.VK_D,0), "right");
+    public InputLeftAction() {
+        super(KeyStroke.getKeyStroke(KeyEvent.VK_A,0), "left");
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        GameState.getPlayerCar().moveRight();
+        GameState.getPlayerCar().moveLeft();
     }
 }

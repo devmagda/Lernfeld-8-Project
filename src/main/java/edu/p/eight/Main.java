@@ -41,9 +41,12 @@ class Main {
                     MusicUtil.stop();
                 }
                 gui.update();
+                if(Stats.dead) {
+                    this.cancel();
+                }
+
             }
         };
-
         // Start the Timer with a delay of 0
         // and repeat every 500 milliseconds.
         timer.schedule(task, 0, 60);

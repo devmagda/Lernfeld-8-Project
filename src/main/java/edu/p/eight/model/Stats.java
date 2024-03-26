@@ -21,6 +21,8 @@ public class Stats {
     public static float decoSpawnRate;
     public static boolean dead;
 
+    public static boolean endGame;
+
     private static long timeStampLastUpdate;
 
     public static void init() {
@@ -32,6 +34,7 @@ public class Stats {
         decoSpawnRate = DEFAULT_DECO_SPAWN_RATE;
         dead = false;
         timeStampLastUpdate = new Date().getTime();
+        endGame = false;
     }
 
     // TODO @Anne
