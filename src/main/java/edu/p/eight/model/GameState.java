@@ -24,7 +24,7 @@ public class GameState {
 
     public static void init() {
         Stats.init();
-        playerCar = new PlayerEntity(TextureManager.getPlayerTextures().get(0), Lanes.CENTER);
+        playerCar = new PlayerEntity(TextureManager.getPlayerTextures().get(1), Lanes.CENTER);
         initLanes();
     }
 

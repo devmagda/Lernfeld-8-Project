@@ -2,9 +2,7 @@ package edu.p.eight.generators;
 
 import edu.p.eight.model.Lane;
 import edu.p.eight.model.entity.Entity;
-import edu.p.eight.model.entity.MovingEntity;
 import edu.p.eight.view.Position;
-import edu.p.eight.view.Texture;
 
 public class DrawingFunctions {
     public static Position decoLeft(Entity entity) {

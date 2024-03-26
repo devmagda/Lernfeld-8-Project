@@ -1,19 +1,9 @@
 package edu.p.eight.manager;
 
-import edu.p.eight.builder.TextureBuilder;
-import edu.p.eight.model.GameState;
-import edu.p.eight.model.Lane;
-import edu.p.eight.model.Stats;
-import edu.p.eight.model.entity.DecoEntity;
-import edu.p.eight.model.entity.MovingEntity;
-import edu.p.eight.model.entity.PlayerEntity;
-import edu.p.eight.model.entity.StartEntity;
 import edu.p.eight.utils.FileUtil;
-import edu.p.eight.view.Position;
 import edu.p.eight.view.Texture;
 
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 public class TextureManager {

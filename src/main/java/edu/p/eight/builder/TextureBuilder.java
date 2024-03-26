@@ -1,7 +1,6 @@
 package edu.p.eight.builder;
 
 import edu.p.eight.model.entity.Entity;
-import edu.p.eight.model.entity.MovingEntity;
 import edu.p.eight.view.Position;
 import edu.p.eight.view.Texture;
 
