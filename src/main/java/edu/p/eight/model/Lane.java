@@ -21,21 +21,21 @@ public class Lane {
     private final Supplier<Entity> generator;
 
     public static final float Y_LOWER = 400;
-    public static final float Y_UPPER = 98;
+    public static final float Y_UPPER = 200;
 
-    public static final Position DECO_LEFT_START = new Position(250, Y_UPPER, 1);
+    public static final Position DECO_LEFT_START = new Position(246, Y_UPPER, 1);
     public static final Position DECO_LEFT_END = new Position(0, Y_LOWER, 1);
 
     public static final Position LEFT_START = new Position(250, Y_UPPER, 1);
-    public static final Position LEFT_END = new Position(100, Y_LOWER, 1);
+    public static final Position LEFT_END = new Position(125, Y_LOWER, 1);
 
     public static final Position CENTER_START = new Position(250, Y_UPPER, 1);
     public static final Position CENTER_END = new Position(250, Y_LOWER, 1);
 
     public static final Position RIGHT_START = new Position(250, Y_UPPER, 1);
-    public static final Position RIGHT_END = new Position(400, Y_LOWER, 1);
+    public static final Position RIGHT_END = new Position(375, Y_LOWER, 1);
 
-    public static final Position DECO_RIGHT_START = new Position(250, Y_UPPER, 1);
+    public static final Position DECO_RIGHT_START = new Position(265, Y_UPPER, 1);
     public static final Position DECO_RIGHT_END = new Position(500, Y_LOWER, 1);
 
     Lane(Supplier<Entity> generator, Function<Entity, Position> drawCalculations, Entity ... entities) {
