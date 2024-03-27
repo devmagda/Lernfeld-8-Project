@@ -36,19 +36,19 @@ public class TextureManager {
     }
 
     private static List<Texture> loadCarTextures() {
-        return FileUtil.getFilesInDirectory(FileUtil.getBasePath()  + "entities/moving/").stream().map(Texture::fromFile).collect(Collectors.toList());
+        return FileUtil.getFilesInDirectory(FileUtil.getBasePath()  + "entities/moving/").stream().filter(file -> !file.getName().startsWith(".")).map(Texture::fromFile).collect(Collectors.toList());
     }
 
     private static List<Texture> loadStaticTextures() {
-        return FileUtil.getFilesInDirectory(FileUtil.getBasePath()  + "entities/static/").stream().map(Texture::fromFile).collect(Collectors.toList());
+        return FileUtil.getFilesInDirectory(FileUtil.getBasePath()  + "entities/static/").stream().filter(file -> !file.getName().startsWith(".")).map(Texture::fromFile).collect(Collectors.toList());
     }
 
     private static List<Texture> loadPlayerTextures() {
-        return FileUtil.getFilesInDirectory(FileUtil.getBasePath()  + "entities/player/").stream().map(Texture::fromFile).collect(Collectors.toList());
+        return FileUtil.getFilesInDirectory(FileUtil.getBasePath()  + "entities/player/").stream().filter(file -> !file.getName().startsWith(".")).map(Texture::fromFile).collect(Collectors.toList());
     }
 
     private static List<Texture> loadSpecialTextures() {
-        return FileUtil.getFilesInDirectory(FileUtil.getBasePath()  + "entities/special/").stream().map(Texture::fromFile).collect(Collectors.toList());
+        return FileUtil.getFilesInDirectory(FileUtil.getBasePath()  + "entities/special/").stream().filter(file -> !file.getName().startsWith(".")).map(Texture::fromFile).collect(Collectors.toList());
     }
 
     public static Texture loadStartTexture() {
