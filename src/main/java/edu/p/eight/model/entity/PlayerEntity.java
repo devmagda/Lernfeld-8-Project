@@ -1,7 +1,10 @@
 package edu.p.eight.model.entity;
 
+import edu.p.eight.manager.TextureManager;
 import edu.p.eight.model.Lane;
 import edu.p.eight.view.Texture;
+
+import java.util.Random;
 
 import static edu.p.eight.model.Lane.*;
 
@@ -63,5 +66,11 @@ public class PlayerEntity extends Entity {
 
     public void setDistance(float distance) {
         this.distance = distance;
+    }
+
+    public static PlayerEntity getRandom() {
+        int index = new Random().nextInt(TextureManager.getPlayerTextures().size());
+        Texture deco = TextureManager.getPlayerTextures().get(index);
+        return new PlayerEntity(deco, Lanes.CENTER);
     }
 }

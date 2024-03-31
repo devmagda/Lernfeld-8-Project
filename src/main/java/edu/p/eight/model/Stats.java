@@ -13,6 +13,12 @@ public class Stats {
     public static final float DEFAULT_DECO_SPAWN_RATE = 0.1f;
     public static final long DEFAULT_ROUND_LENGTH_MS = 10000;
     public static float speed;
+
+    /**
+     * Spawnrate is for all three roads together. So 3 means 100% spawn rate.
+     * To make the game not impossible to play, when 3 cars would spawn and the player could not pass,
+     * the middle one will always not spawn.
+     */
     public static float spawnRate;
     public static float increaseRate;
     public static boolean doCollision;

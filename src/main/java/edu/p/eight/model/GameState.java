@@ -24,7 +24,7 @@ public class GameState {
 
     public static void init() {
         Stats.init();
-        playerCar = new PlayerEntity(TextureManager.getPlayerTextures().get(1), Lanes.CENTER);
+        playerCar = PlayerEntity.getRandom();
         initLanes();
     }
 
@@ -40,6 +40,7 @@ public class GameState {
     public static void update() throws PlayerCrashedException {
         checkCollisions();
         updateLanes();
+        checkCollisions();
     }
 
     public static void updateLanes() {
@@ -59,7 +60,7 @@ public class GameState {
         }
         for(Lanes lane : getDecoLanes()) {
             try {
-                lanes.get(lane).update(Stats.speed);
+                lanes.get(lane).update(Stats.speed * 2);
                 Entity entity = lanes.get(lane).trySpawnCar(Stats.spawnRate);
                 lanes.get(lane).spawnEntity(entity);
             } catch (SpawningFailedException e) {
