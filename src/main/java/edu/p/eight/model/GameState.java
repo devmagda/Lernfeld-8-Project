@@ -23,7 +23,7 @@ public class GameState {
     private static PlayerEntity playerCar;
 
     public static void init() {
-        Stats.init();
+        Stats.initFromProperties();
         playerCar = PlayerEntity.getRandom();
         initLanes();
     }
@@ -47,7 +47,7 @@ public class GameState {
         int spawnCounter = 1;
         for(Lanes lane : getStreetLanes()) {
             int removedEntities = lanes.get(lane).update(Stats.speed);
-            Stats.carsPassed += removedEntities;
+            Stats.addCarsPassed(removedEntities);
             if(spawnCounter < LANE_COUNT) {
                 try {
                     Entity entity = lanes.get(lane).trySpawnCar(Stats.spawnRate);

@@ -22,6 +22,7 @@ public class TextureUtil {
         drawGameState(builder);
         drawOverlay(builder);
         drawScore(builder);
+        drawHighScore(builder);
         return builder.build();
     }
 
@@ -31,9 +32,14 @@ public class TextureUtil {
     }
 
     private static void drawScore(TextureBuilder builder) {
-        int actualScore = Stats.carsPassed == -1 ? 0 : Stats.carsPassed;
-        String text = "Cars passed: " + actualScore;
+        String text = "Cars passed: " + Stats.getCarsPassed();
         builder.addText(text, 5, 380);
+    }
+
+
+    private static void drawHighScore(TextureBuilder builder) {
+        String text = "Highscore: " + Stats.highScore;
+        builder.addText(text, 20, 370);
     }
 
     private static void drawGameState(TextureBuilder builder) {

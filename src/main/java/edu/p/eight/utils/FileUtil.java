@@ -1,9 +1,9 @@
 package edu.p.eight.utils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 public class FileUtil {
     private static String cachedFolder = null;
@@ -24,12 +24,43 @@ public class FileUtil {
         throw new RuntimeException("Folder <" + folder +"> is a file");
     }
 
-    public static File getConfigFile() throws FileNotFoundException {
-        File file = new File(getBasePath() + "config.properties");
-        if(!file.exists() || !file.isFile()) {
-            throw new FileNotFoundException("Config file does not exist!");
+
+    public static void saveProperties(Properties properties) {
+        try {
+            // Change the path to the location where you want to save the properties file
+            FileOutputStream outputStream = new FileOutputStream(getConfigPath());
+            properties.store(outputStream, "Highscore");
+            outputStream.close();
+            System.out.println("Properties saved successfully.");
+        } catch (IOException e) {
+            System.err.println("Failed to save properties: " + e.getMessage());
         }
-        return file;
+    }
+
+    public static Properties getConfigFile() throws FileNotFoundException {
+        Properties properties = new Properties();
+        FileInputStream fileInputStream = null;
+        String filePath = getConfigPath();
+        try {
+            File file = new File(filePath);
+            if (file.exists()) {
+                fileInputStream = new FileInputStream(file);
+                properties.load(fileInputStream);
+                return properties;
+            } else {
+                throw new FileNotFoundException("Properties file could not be found");
+            }
+        } catch (IOException e) {
+            throw new FileNotFoundException("Properties file could not be found");
+        } finally {
+            if (fileInputStream != null) {
+                try {
+                    fileInputStream.close();
+                } catch (IOException e) {
+                    throw new RuntimeException("Could not close fileInputStream for file:" + filePath);
+                }
+            }
+        }
     }
 
     public static String getBasePath() {
@@ -42,5 +73,9 @@ public class FileUtil {
             }
         }
         return cachedFolder;
+    }
+
+    public static String getConfigPath() {
+        return getBasePath() + "config.properties";
     }
 }

@@ -42,6 +42,7 @@ class Main {
                 }
                 gui.update();
                 if(Stats.dead) {
+                    Stats.saveHighscore();
                     this.cancel();
                 }
 

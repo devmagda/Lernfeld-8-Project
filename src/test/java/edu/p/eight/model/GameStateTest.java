@@ -24,7 +24,6 @@ public class GameStateTest {
 
         // Setting player position to the left
         GameState.getPlayerCar().setDistance(0);
-        GameState.getPlayerCar().moveLeft();
 
         // Setting up the car with extended overlapping distance
         this.car = new StreetEntity(null);
@@ -33,7 +32,7 @@ public class GameStateTest {
 
     @Test
     public void testCrash() {
-        assertTrue(playerCrashed());
+        assertTrue("Car should have crashed", playerCrashed());
     }
 
     public boolean playerCrashed() {
@@ -41,8 +40,12 @@ public class GameStateTest {
             // Setting speed any other than here did not work ..
             Stats.speed = Lane.LENGTH;
 
-            GameState.getLane(Lane.Lanes.LEFT).spawnEntity(this.car);
+            // Enforce Spawn
+            GameState.getLane(Lane.Lanes.CENTER).spawnEntity(this.car);
+
+            // Update lane to crash the cars
             GameState.update();
+
         } catch (PlayerCrashedException e) {
             return true;
         }
