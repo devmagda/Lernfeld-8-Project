@@ -8,7 +8,6 @@ import java.util.Random;
 
 public class StreetEntity extends MovingEntity {
 
-    public static final Texture.DrawInstructions DEFAULT_DRAW_INSTRUCTIONS = Texture.DrawInstructions.CENTER;
     public static final float DEFAULT_START = Lane.LENGTH / 2;
     public StreetEntity(Texture texture) {
         super(texture, true);

@@ -6,9 +6,7 @@ import edu.p.eight.view.Texture;
 import java.util.Random;
 
 public class DecoEntity extends MovingEntity {
-
-    public static final Texture.DrawInstructions DEFAULT_DRAW_INSTRUCTIONS = Texture.DrawInstructions.LOWER_CENTER;
-
+    
     public DecoEntity(Texture texture) {
         super(texture, false);
     }
